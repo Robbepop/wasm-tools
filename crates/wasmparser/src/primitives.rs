@@ -13,8 +13,11 @@
  * limitations under the License.
  */
 
+#[cfg(feature = "std")]
 use std::error::Error;
+
 use std::fmt;
+use std::prelude::v1::*;
 use std::result;
 
 #[derive(Debug, Clone)]
@@ -34,6 +37,7 @@ pub(crate) struct BinaryReaderErrorInner {
 
 pub type Result<T, E = BinaryReaderError> = result::Result<T, E>;
 
+#[cfg(feature = "std")]
 impl Error for BinaryReaderError {}
 
 impl fmt::Display for BinaryReaderError {
