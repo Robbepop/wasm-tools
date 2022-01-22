@@ -308,7 +308,7 @@ impl Parser {
     /// ```
     /// use std::io::Read;
     /// use anyhow::Result;
-    /// use wasmparser::{Parser, Chunk, Payload::*};
+    /// use wasmparser_nostd::{Parser, Chunk, Payload::*};
     ///
     /// fn parse(mut reader: impl Read) -> Result<()> {
     ///     let mut buf = Vec::new();
@@ -756,7 +756,7 @@ impl Parser {
     /// # Examples
     ///
     /// ```
-    /// use wasmparser::{Result, Parser, Chunk, Range, SectionReader, Payload::*};
+    /// use wasmparser_nostd::{Result, Parser, Chunk, Range, SectionReader, Payload::*};
     ///
     /// fn objdump_headers(mut wasm: &[u8]) -> Result<()> {
     ///     let mut parser = Parser::new(0);
