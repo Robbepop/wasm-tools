@@ -20,7 +20,7 @@ memchr = "2.4.1"
 [dev-dependencies]
 anyhow = "1.0"
 rayon = "1.0"
-wasmparser = { path = "../wasmparser" }
+wasmparser = { path = "../wasmparser", package = "wasmparser-nostd" }
 wat = { path = "../wat" }
 
 [features]

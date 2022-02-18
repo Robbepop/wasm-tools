@@ -43,7 +43,7 @@ impl<'a> TypeSectionReader<'a> {
     ///
     /// # Examples
     /// ```
-    /// use wasmparser::TypeSectionReader;
+    /// use wasmparser_nostd::TypeSectionReader;
     /// # let data: &[u8] = &[0x01, 0x60, 0x00, 0x00];
     /// let mut type_reader = TypeSectionReader::new(data, 0).unwrap();
     /// for _ in 0..type_reader.get_count() {
@@ -96,7 +96,7 @@ impl<'a> IntoIterator for TypeSectionReader<'a> {
     ///
     /// # Examples
     /// ```
-    /// use wasmparser::TypeSectionReader;
+    /// use wasmparser_nostd::TypeSectionReader;
     /// # let data: &[u8] = &[0x01, 0x60, 0x00, 0x00];
     /// let mut type_reader = TypeSectionReader::new(data, 0).unwrap();
     /// for ty in type_reader {
