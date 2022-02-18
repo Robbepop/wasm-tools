@@ -23,6 +23,14 @@
 //! this is not the right library for you. You could however, build such
 //! a data-structure using this library.
 
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std as alloc;
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
+
 pub use crate::binary_reader::BinaryReader;
 pub use crate::binary_reader::Range;
 

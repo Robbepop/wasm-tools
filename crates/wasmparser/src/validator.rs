@@ -21,9 +21,13 @@ use crate::{BinaryReaderError, GlobalType, MemoryType, Range, Result, TableType,
 use crate::{DataKind, ElementItem, ElementKind, InitExpr, Instance, Operator};
 use crate::{FuncType, SectionReader, SectionWithLimitedItems};
 use crate::{FunctionBody, Parser, Payload};
-use std::collections::{HashMap, HashSet};
-use std::mem;
-use std::sync::Arc;
+use alloc::collections::{BTreeMap, BTreeSet};
+use core::mem;
+use alloc::vec::Vec;
+use alloc::string::String;
+use alloc::format;
+use alloc::sync::Arc;
+use alloc::string::ToString;
 
 /// Test whether the given buffer contains a valid WebAssembly module,
 /// analogous to [`WebAssembly.validate`][js] in the JS API.
@@ -144,7 +148,7 @@ struct ModuleState {
     tags: Vec<usize>,            // pointer into `validator.types`
     submodules: Vec<usize>,      // pointer into `validator.types`
     instances: Vec<usize>,       // pointer into `validator.types`
-    function_references: HashSet<u32>,
+    function_references: BTreeSet<u32>,
 
     // This is populated when we hit the export section
     exports: NameSet,
@@ -275,14 +279,14 @@ impl TypeDef {
 struct ModuleType {
     imports_size: u32,
     exports_size: u32,
-    imports: HashMap<String, EntityType>,
-    exports: HashMap<String, EntityType>,
+    imports: BTreeMap<String, EntityType>,
+    exports: BTreeMap<String, EntityType>,
 }
 
 #[derive(Default)]
 struct InstanceType {
     type_size: u32,
-    exports: HashMap<String, EntityType>,
+    exports: BTreeMap<String, EntityType>,
 }
 
 #[derive(Clone)]
@@ -774,7 +778,7 @@ impl Validator {
         // Clear the list of implicit imports after the import section is
         // finished since later import sections cannot append further to the
         // pseudo-instances defined in this import section.
-        self.cur.state.assert_mut().imports.implicit.drain();
+        self.cur.state.assert_mut().imports.implicit.clear();
         Ok(())
     }
 
@@ -1128,8 +1132,8 @@ impl Validator {
 
     fn check_type_sets_match(
         &self,
-        a: &HashMap<String, EntityType>,
-        b: &HashMap<String, EntityType>,
+        a: &BTreeMap<String, EntityType>,
+        b: &BTreeMap<String, EntityType>,
         desc: &str,
     ) -> Result<()> {
         for (name, b) in b {
@@ -1796,8 +1800,8 @@ impl WasmModuleResources for ValidatorResources {
 }
 
 mod arc {
-    use std::ops::Deref;
-    use std::sync::Arc;
+    use core::ops::Deref;
+    use alloc::sync::Arc;
 
     pub struct MaybeOwned<T> {
         owned: bool,
@@ -1848,8 +1852,8 @@ mod arc {
 /// single-level import of an instance, and that mapping happens here.
 #[derive(Default)]
 struct NameSet {
-    set: HashMap<String, EntityType>,
-    implicit: HashSet<String>,
+    set: BTreeMap<String, EntityType>,
+    implicit: BTreeSet<String>,
     type_size: u32,
 }
 
@@ -2075,7 +2079,7 @@ impl<T> SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::Index<usize> for SnapshotList<T> {
+impl<T> core::ops::Index<usize> for SnapshotList<T> {
     type Output = T;
 
     fn index(&self, index: usize) -> &T {
@@ -2083,7 +2087,7 @@ impl<T> std::ops::Index<usize> for SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::IndexMut<usize> for SnapshotList<T> {
+impl<T> core::ops::IndexMut<usize> for SnapshotList<T> {
     fn index_mut(&mut self, index: usize) -> &mut T {
         self.get_mut(index).unwrap()
     }
