@@ -2,7 +2,7 @@
 //!
 use super::{
     check_max, combine_type_sizes,
-    operators::OperatorValidator,
+    operators::{OperatorValidatorInner},
     types::{EntityType, Type, TypeId, TypeList},
 };
 use crate::{
@@ -247,13 +247,9 @@ impl ModuleState {
         offset: usize,
     ) -> Result<()> {
         let mut ops = expr.get_operators_reader();
-        let mut validator = OperatorValidator::new_const_expr(
+        let mut validator = OperatorValidatorInner::new_const_expr(
             features,
             expected_ty,
-            OperatorValidatorResources {
-                module: &self.module,
-                types,
-            },
         );
         let mut uninserted_funcref = false;
 
@@ -331,10 +327,18 @@ impl ModuleState {
                 }
             }
 
-            validator.process_operator(&op, offset)?;
+            let resources = OperatorValidatorResources {
+                module: &self.module,
+                types,
+            };
+            validator.validate(&op, offset, &resources)?;
         }
 
-        validator.finish(offset)?;
+        let resources = OperatorValidatorResources {
+            module: &self.module,
+            types,
+        };
+        validator.finish(&resources, offset)?;
 
         // See comment in `RefFunc` above for why this is an assert.
         assert!(!uninserted_funcref);

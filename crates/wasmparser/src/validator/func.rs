@@ -42,7 +42,7 @@ impl<T: WasmModuleResources> FuncValidator<T> {
     /// This returns the height of the whole operand stack for this function,
     /// not just for the current control frame.
     pub fn operand_stack_height(&self) -> u32 {
-        self.validator.stack.len_operands() as u32
+        self.validator.len_operands() as u32
     }
 
     /// Convenience function to validate an entire function's body.
@@ -52,7 +52,7 @@ impl<T: WasmModuleResources> FuncValidator<T> {
     pub fn validate(&mut self, body: &FunctionBody<'_>) -> Result<()> {
         let mut reader = body.get_binary_reader();
         self.read_locals(&mut reader)?;
-        reader.allow_memarg64(self.validator.features.memory64);
+        reader.allow_memarg64(self.validator.features().memory64);
         while !reader.eof() {
             reader.visit_operator(self)??;
         }
