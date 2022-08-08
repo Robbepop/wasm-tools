@@ -1234,29 +1234,29 @@ pub trait VisitOperator<'a, Input> {
             Operator::LocalTee { local_index } => self.visit_local_tee(input, local_index),
             Operator::GlobalGet { global_index } => self.visit_global_get(input, global_index),
             Operator::GlobalSet { global_index } => self.visit_global_set(input, global_index),
-            Operator::I32Load { memarg } => self.visit_i32_load(input, memarg),
-            Operator::I64Load { memarg } => self.visit_i64_load(input, memarg),
-            Operator::F32Load { memarg } => self.visit_f32_load(input, memarg),
-            Operator::F64Load { memarg } => self.visit_f64_load(input, memarg),
-            Operator::I32Load8S { memarg } => self.visit_i32_load8_s(input, memarg),
-            Operator::I32Load8U { memarg } => self.visit_i32_load8_u(input, memarg),
-            Operator::I32Load16S { memarg } => self.visit_i32_load16_s(input, memarg),
-            Operator::I32Load16U { memarg } => self.visit_i32_load16_u(input, memarg),
-            Operator::I64Load8S { memarg } => self.visit_i64_load8_s(input, memarg),
-            Operator::I64Load8U { memarg } => self.visit_i64_load8_u(input, memarg),
-            Operator::I64Load16S { memarg } => self.visit_i64_load16_s(input, memarg),
-            Operator::I64Load16U { memarg } => self.visit_i64_load16_u(input, memarg),
-            Operator::I64Load32S { memarg } => self.visit_i64_load32_s(input, memarg),
-            Operator::I64Load32U { memarg } => self.visit_i64_load32_u(input, memarg),
-            Operator::I32Store { memarg } => self.visit_i32_store(input, memarg),
-            Operator::I64Store { memarg } => self.visit_i64_store(input, memarg),
-            Operator::F32Store { memarg } => self.visit_f32_store(input, memarg),
-            Operator::F64Store { memarg } => self.visit_f64_store(input, memarg),
-            Operator::I32Store8 { memarg } => self.visit_i32_store8(input, memarg),
-            Operator::I32Store16 { memarg } => self.visit_i32_store16(input, memarg),
-            Operator::I64Store8 { memarg } => self.visit_i64_store8(input, memarg),
-            Operator::I64Store16 { memarg } => self.visit_i64_store16(input, memarg),
-            Operator::I64Store32 { memarg } => self.visit_i64_store32(input, memarg),
+            Operator::I32Load { ref memarg } => self.visit_i32_load(input, memarg),
+            Operator::I64Load { ref memarg } => self.visit_i64_load(input, memarg),
+            Operator::F32Load { ref memarg } => self.visit_f32_load(input, memarg),
+            Operator::F64Load { ref memarg } => self.visit_f64_load(input, memarg),
+            Operator::I32Load8S { ref memarg } => self.visit_i32_load8_s(input, memarg),
+            Operator::I32Load8U { ref memarg } => self.visit_i32_load8_u(input, memarg),
+            Operator::I32Load16S { ref memarg } => self.visit_i32_load16_s(input, memarg),
+            Operator::I32Load16U { ref memarg } => self.visit_i32_load16_u(input, memarg),
+            Operator::I64Load8S { ref memarg } => self.visit_i64_load8_s(input, memarg),
+            Operator::I64Load8U { ref memarg } => self.visit_i64_load8_u(input, memarg),
+            Operator::I64Load16S { ref memarg } => self.visit_i64_load16_s(input, memarg),
+            Operator::I64Load16U { ref memarg } => self.visit_i64_load16_u(input, memarg),
+            Operator::I64Load32S { ref memarg } => self.visit_i64_load32_s(input, memarg),
+            Operator::I64Load32U { ref memarg } => self.visit_i64_load32_u(input, memarg),
+            Operator::I32Store { ref memarg } => self.visit_i32_store(input, memarg),
+            Operator::I64Store { ref memarg } => self.visit_i64_store(input, memarg),
+            Operator::F32Store { ref memarg } => self.visit_f32_store(input, memarg),
+            Operator::F64Store { ref memarg } => self.visit_f64_store(input, memarg),
+            Operator::I32Store8 { ref memarg } => self.visit_i32_store8(input, memarg),
+            Operator::I32Store16 { ref memarg } => self.visit_i32_store16(input, memarg),
+            Operator::I64Store8 { ref memarg } => self.visit_i64_store8(input, memarg),
+            Operator::I64Store16 { ref memarg } => self.visit_i64_store16(input, memarg),
+            Operator::I64Store32 { ref memarg } => self.visit_i64_store32(input, memarg),
             Operator::MemorySize { mem, mem_byte } => self.visit_memory_size(input, mem, mem_byte),
             Operator::MemoryGrow { mem, mem_byte } => self.visit_memory_grow(input, mem, mem_byte),
             Operator::I32Const { value } => self.visit_i32_const(input, value),
@@ -1414,95 +1414,95 @@ pub trait VisitOperator<'a, Input> {
             Operator::TableSet { table } => self.visit_table_set(input, table),
             Operator::TableGrow { table } => self.visit_table_grow(input, table),
             Operator::TableSize { table } => self.visit_table_size(input, table),
-            Operator::MemoryAtomicNotify { memarg } => self.visit_memory_atomic_notify(input, memarg),
-            Operator::MemoryAtomicWait32 { memarg } => self.visit_memory_atomic_wait32(input, memarg),
-            Operator::MemoryAtomicWait64 { memarg } => self.visit_memory_atomic_wait64(input, memarg),
+            Operator::MemoryAtomicNotify { ref memarg } => self.visit_memory_atomic_notify(input, memarg),
+            Operator::MemoryAtomicWait32 { ref memarg } => self.visit_memory_atomic_wait32(input, memarg),
+            Operator::MemoryAtomicWait64 { ref memarg } => self.visit_memory_atomic_wait64(input, memarg),
             Operator::AtomicFence { flags } => self.visit_atomic_fence(input, flags),
-            Operator::I32AtomicLoad { memarg } => self.visit_i32_atomic_load(input, memarg),
-            Operator::I64AtomicLoad { memarg } => self.visit_i64_atomic_load(input, memarg),
-            Operator::I32AtomicLoad8U { memarg } => self.visit_i32_atomic_load8_u(input, memarg),
-            Operator::I32AtomicLoad16U { memarg } => self.visit_i32_atomic_load16_u(input, memarg),
-            Operator::I64AtomicLoad8U { memarg } => self.visit_i64_atomic_load8_u(input, memarg),
-            Operator::I64AtomicLoad16U { memarg } => self.visit_i64_atomic_load16_u(input, memarg),
-            Operator::I64AtomicLoad32U { memarg } => self.visit_i64_atomic_load32_u(input, memarg),
-            Operator::I32AtomicStore { memarg } => self.visit_i32_atomic_store(input, memarg),
-            Operator::I64AtomicStore { memarg } => self.visit_i64_atomic_store(input, memarg),
-            Operator::I32AtomicStore8 { memarg } => self.visit_i32_atomic_store8(input, memarg),
-            Operator::I32AtomicStore16 { memarg } => self.visit_i32_atomic_store16(input, memarg),
-            Operator::I64AtomicStore8 { memarg } => self.visit_i64_atomic_store8(input, memarg),
-            Operator::I64AtomicStore16 { memarg } => self.visit_i64_atomic_store16(input, memarg),
-            Operator::I64AtomicStore32 { memarg } => self.visit_i64_atomic_store32(input, memarg),
-            Operator::I32AtomicRmwAdd { memarg } => self.visit_i32_atomic_rmw_add(input, memarg),
-            Operator::I64AtomicRmwAdd { memarg } => self.visit_i64_atomic_rmw_add(input, memarg),
-            Operator::I32AtomicRmw8AddU { memarg } => self.visit_i32_atomic_rmw8_add_u(input, memarg),
-            Operator::I32AtomicRmw16AddU { memarg } => self.visit_i32_atomic_rmw16_add_u(input, memarg),
-            Operator::I64AtomicRmw8AddU { memarg } => self.visit_i64_atomic_rmw8_add_u(input, memarg),
-            Operator::I64AtomicRmw16AddU { memarg } => self.visit_i64_atomic_rmw16_add_u(input, memarg),
-            Operator::I64AtomicRmw32AddU { memarg } => self.visit_i64_atomic_rmw32_add_u(input, memarg),
-            Operator::I32AtomicRmwSub { memarg } => self.visit_i32_atomic_rmw_sub(input, memarg),
-            Operator::I64AtomicRmwSub { memarg } => self.visit_i64_atomic_rmw_sub(input, memarg),
-            Operator::I32AtomicRmw8SubU { memarg } => self.visit_i32_atomic_rmw8_sub_u(input, memarg),
-            Operator::I32AtomicRmw16SubU { memarg } => self.visit_i32_atomic_rmw16_sub_u(input, memarg),
-            Operator::I64AtomicRmw8SubU { memarg } => self.visit_i64_atomic_rmw8_sub_u(input, memarg),
-            Operator::I64AtomicRmw16SubU { memarg } => self.visit_i64_atomic_rmw16_sub_u(input, memarg),
-            Operator::I64AtomicRmw32SubU { memarg } => self.visit_i64_atomic_rmw32_sub_u(input, memarg),
-            Operator::I32AtomicRmwAnd { memarg } => self.visit_i32_atomic_rmw_and(input, memarg),
-            Operator::I64AtomicRmwAnd { memarg } => self.visit_i64_atomic_rmw_and(input, memarg),
-            Operator::I32AtomicRmw8AndU { memarg } => self.visit_i32_atomic_rmw8_and_u(input, memarg),
-            Operator::I32AtomicRmw16AndU { memarg } => self.visit_i32_atomic_rmw16_and_u(input, memarg),
-            Operator::I64AtomicRmw8AndU { memarg } => self.visit_i64_atomic_rmw8_and_u(input, memarg),
-            Operator::I64AtomicRmw16AndU { memarg } => self.visit_i64_atomic_rmw16_and_u(input, memarg),
-            Operator::I64AtomicRmw32AndU { memarg } => self.visit_i64_atomic_rmw32_and_u(input, memarg),
-            Operator::I32AtomicRmwOr { memarg } => self.visit_i32_atomic_rmw_or(input, memarg),
-            Operator::I64AtomicRmwOr { memarg } => self.visit_i64_atomic_rmw_or(input, memarg),
-            Operator::I32AtomicRmw8OrU { memarg } => self.visit_i32_atomic_rmw8_or_u(input, memarg),
-            Operator::I32AtomicRmw16OrU { memarg } => self.visit_i32_atomic_rmw16_or_u(input, memarg),
-            Operator::I64AtomicRmw8OrU { memarg } => self.visit_i64_atomic_rmw8_or_u(input, memarg),
-            Operator::I64AtomicRmw16OrU { memarg } => self.visit_i64_atomic_rmw16_or_u(input, memarg),
-            Operator::I64AtomicRmw32OrU { memarg } => self.visit_i64_atomic_rmw32_or_u(input, memarg),
-            Operator::I32AtomicRmwXor { memarg } => self.visit_i32_atomic_rmw_xor(input, memarg),
-            Operator::I64AtomicRmwXor { memarg } => self.visit_i64_atomic_rmw_xor(input, memarg),
-            Operator::I32AtomicRmw8XorU { memarg } => self.visit_i32_atomic_rmw8_xor_u(input, memarg),
-            Operator::I32AtomicRmw16XorU { memarg } => self.visit_i32_atomic_rmw16_xor_u(input, memarg),
-            Operator::I64AtomicRmw8XorU { memarg } => self.visit_i64_atomic_rmw8_xor_u(input, memarg),
-            Operator::I64AtomicRmw16XorU { memarg } => self.visit_i64_atomic_rmw16_xor_u(input, memarg),
-            Operator::I64AtomicRmw32XorU { memarg } => self.visit_i64_atomic_rmw32_xor_u(input, memarg),
-            Operator::I32AtomicRmwXchg { memarg } => self.visit_i32_atomic_rmw_xchg(input, memarg),
-            Operator::I64AtomicRmwXchg { memarg } => self.visit_i64_atomic_rmw_xchg(input, memarg),
-            Operator::I32AtomicRmw8XchgU { memarg } => self.visit_i32_atomic_rmw8_xchg_u(input, memarg),
-            Operator::I32AtomicRmw16XchgU { memarg } => self.visit_i32_atomic_rmw16_xchg_u(input, memarg),
-            Operator::I64AtomicRmw8XchgU { memarg } => self.visit_i64_atomic_rmw8_xchg_u(input, memarg),
-            Operator::I64AtomicRmw16XchgU { memarg } => self.visit_i64_atomic_rmw16_xchg_u(input, memarg),
-            Operator::I64AtomicRmw32XchgU { memarg } => self.visit_i64_atomic_rmw32_xchg_u(input, memarg),
-            Operator::I32AtomicRmwCmpxchg { memarg } => self.visit_i32_atomic_rmw_cmpxchg(input, memarg),
-            Operator::I64AtomicRmwCmpxchg { memarg } => self.visit_i64_atomic_rmw_cmpxchg(input, memarg),
-            Operator::I32AtomicRmw8CmpxchgU { memarg } => self.visit_i32_atomic_rmw8_cmpxchg_u(input, memarg),
-            Operator::I32AtomicRmw16CmpxchgU { memarg } => self.visit_i32_atomic_rmw16_cmpxchg_u(input, memarg),
-            Operator::I64AtomicRmw8CmpxchgU { memarg } => self.visit_i64_atomic_rmw8_cmpxchg_u(input, memarg),
-            Operator::I64AtomicRmw16CmpxchgU { memarg } => self.visit_i64_atomic_rmw16_cmpxchg_u(input, memarg),
-            Operator::I64AtomicRmw32CmpxchgU { memarg } => self.visit_i64_atomic_rmw32_cmpxchg_u(input, memarg),
-            Operator::V128Load { memarg } => self.visit_v128_load(input, memarg),
-            Operator::V128Load8x8S { memarg } => self.visit_v128_load8x8_s(input, memarg),
-            Operator::V128Load8x8U { memarg } => self.visit_v128_load8x8_u(input, memarg),
-            Operator::V128Load16x4S { memarg } => self.visit_v128_load16x4_s(input, memarg),
-            Operator::V128Load16x4U { memarg } => self.visit_v128_load16x4_u(input, memarg),
-            Operator::V128Load32x2S { memarg } => self.visit_v128_load32x2_s(input, memarg),
-            Operator::V128Load32x2U { memarg } => self.visit_v128_load32x2_u(input, memarg),
-            Operator::V128Load8Splat { memarg } => self.visit_v128_load8_splat(input, memarg),
-            Operator::V128Load16Splat { memarg } => self.visit_v128_load16_splat(input, memarg),
-            Operator::V128Load32Splat { memarg } => self.visit_v128_load32_splat(input, memarg),
-            Operator::V128Load64Splat { memarg } => self.visit_v128_load64_splat(input, memarg),
-            Operator::V128Load32Zero { memarg } => self.visit_v128_load32_zero(input, memarg),
-            Operator::V128Load64Zero { memarg } => self.visit_v128_load64_zero(input, memarg),
-            Operator::V128Store { memarg } => self.visit_v128_store(input, memarg),
-            Operator::V128Load8Lane { memarg, lane } => self.visit_v128_load8_lane(input, memarg, lane),
-            Operator::V128Load16Lane { memarg, lane } => self.visit_v128_load16_lane(input, memarg, lane),
-            Operator::V128Load32Lane { memarg, lane } => self.visit_v128_load32_lane(input, memarg, lane),
-            Operator::V128Load64Lane { memarg, lane } => self.visit_v128_load64_lane(input, memarg, lane),
-            Operator::V128Store8Lane { memarg, lane } => self.visit_v128_store8_lane(input, memarg, lane),
-            Operator::V128Store16Lane { memarg, lane } => self.visit_v128_store16_lane(input, memarg, lane),
-            Operator::V128Store32Lane { memarg, lane } => self.visit_v128_store32_lane(input, memarg, lane),
-            Operator::V128Store64Lane { memarg, lane } => self.visit_v128_store64_lane(input, memarg, lane),
+            Operator::I32AtomicLoad { ref memarg } => self.visit_i32_atomic_load(input, memarg),
+            Operator::I64AtomicLoad { ref memarg } => self.visit_i64_atomic_load(input, memarg),
+            Operator::I32AtomicLoad8U { ref memarg } => self.visit_i32_atomic_load8_u(input, memarg),
+            Operator::I32AtomicLoad16U { ref memarg } => self.visit_i32_atomic_load16_u(input, memarg),
+            Operator::I64AtomicLoad8U { ref memarg } => self.visit_i64_atomic_load8_u(input, memarg),
+            Operator::I64AtomicLoad16U { ref memarg } => self.visit_i64_atomic_load16_u(input, memarg),
+            Operator::I64AtomicLoad32U { ref memarg } => self.visit_i64_atomic_load32_u(input, memarg),
+            Operator::I32AtomicStore { ref memarg } => self.visit_i32_atomic_store(input, memarg),
+            Operator::I64AtomicStore { ref memarg } => self.visit_i64_atomic_store(input, memarg),
+            Operator::I32AtomicStore8 { ref memarg } => self.visit_i32_atomic_store8(input, memarg),
+            Operator::I32AtomicStore16 { ref memarg } => self.visit_i32_atomic_store16(input, memarg),
+            Operator::I64AtomicStore8 { ref memarg } => self.visit_i64_atomic_store8(input, memarg),
+            Operator::I64AtomicStore16 { ref memarg } => self.visit_i64_atomic_store16(input, memarg),
+            Operator::I64AtomicStore32 { ref memarg } => self.visit_i64_atomic_store32(input, memarg),
+            Operator::I32AtomicRmwAdd { ref memarg } => self.visit_i32_atomic_rmw_add(input, memarg),
+            Operator::I64AtomicRmwAdd { ref memarg } => self.visit_i64_atomic_rmw_add(input, memarg),
+            Operator::I32AtomicRmw8AddU { ref memarg } => self.visit_i32_atomic_rmw8_add_u(input, memarg),
+            Operator::I32AtomicRmw16AddU { ref memarg } => self.visit_i32_atomic_rmw16_add_u(input, memarg),
+            Operator::I64AtomicRmw8AddU { ref memarg } => self.visit_i64_atomic_rmw8_add_u(input, memarg),
+            Operator::I64AtomicRmw16AddU { ref memarg } => self.visit_i64_atomic_rmw16_add_u(input, memarg),
+            Operator::I64AtomicRmw32AddU { ref memarg } => self.visit_i64_atomic_rmw32_add_u(input, memarg),
+            Operator::I32AtomicRmwSub { ref memarg } => self.visit_i32_atomic_rmw_sub(input, memarg),
+            Operator::I64AtomicRmwSub { ref memarg } => self.visit_i64_atomic_rmw_sub(input, memarg),
+            Operator::I32AtomicRmw8SubU { ref memarg } => self.visit_i32_atomic_rmw8_sub_u(input, memarg),
+            Operator::I32AtomicRmw16SubU { ref memarg } => self.visit_i32_atomic_rmw16_sub_u(input, memarg),
+            Operator::I64AtomicRmw8SubU { ref memarg } => self.visit_i64_atomic_rmw8_sub_u(input, memarg),
+            Operator::I64AtomicRmw16SubU { ref memarg } => self.visit_i64_atomic_rmw16_sub_u(input, memarg),
+            Operator::I64AtomicRmw32SubU { ref memarg } => self.visit_i64_atomic_rmw32_sub_u(input, memarg),
+            Operator::I32AtomicRmwAnd { ref memarg } => self.visit_i32_atomic_rmw_and(input, memarg),
+            Operator::I64AtomicRmwAnd { ref memarg } => self.visit_i64_atomic_rmw_and(input, memarg),
+            Operator::I32AtomicRmw8AndU { ref memarg } => self.visit_i32_atomic_rmw8_and_u(input, memarg),
+            Operator::I32AtomicRmw16AndU { ref memarg } => self.visit_i32_atomic_rmw16_and_u(input, memarg),
+            Operator::I64AtomicRmw8AndU { ref memarg } => self.visit_i64_atomic_rmw8_and_u(input, memarg),
+            Operator::I64AtomicRmw16AndU { ref memarg } => self.visit_i64_atomic_rmw16_and_u(input, memarg),
+            Operator::I64AtomicRmw32AndU { ref memarg } => self.visit_i64_atomic_rmw32_and_u(input, memarg),
+            Operator::I32AtomicRmwOr { ref memarg } => self.visit_i32_atomic_rmw_or(input, memarg),
+            Operator::I64AtomicRmwOr { ref memarg } => self.visit_i64_atomic_rmw_or(input, memarg),
+            Operator::I32AtomicRmw8OrU { ref memarg } => self.visit_i32_atomic_rmw8_or_u(input, memarg),
+            Operator::I32AtomicRmw16OrU { ref memarg } => self.visit_i32_atomic_rmw16_or_u(input, memarg),
+            Operator::I64AtomicRmw8OrU { ref memarg } => self.visit_i64_atomic_rmw8_or_u(input, memarg),
+            Operator::I64AtomicRmw16OrU { ref memarg } => self.visit_i64_atomic_rmw16_or_u(input, memarg),
+            Operator::I64AtomicRmw32OrU { ref memarg } => self.visit_i64_atomic_rmw32_or_u(input, memarg),
+            Operator::I32AtomicRmwXor { ref memarg } => self.visit_i32_atomic_rmw_xor(input, memarg),
+            Operator::I64AtomicRmwXor { ref memarg } => self.visit_i64_atomic_rmw_xor(input, memarg),
+            Operator::I32AtomicRmw8XorU { ref memarg } => self.visit_i32_atomic_rmw8_xor_u(input, memarg),
+            Operator::I32AtomicRmw16XorU { ref memarg } => self.visit_i32_atomic_rmw16_xor_u(input, memarg),
+            Operator::I64AtomicRmw8XorU { ref memarg } => self.visit_i64_atomic_rmw8_xor_u(input, memarg),
+            Operator::I64AtomicRmw16XorU { ref memarg } => self.visit_i64_atomic_rmw16_xor_u(input, memarg),
+            Operator::I64AtomicRmw32XorU { ref memarg } => self.visit_i64_atomic_rmw32_xor_u(input, memarg),
+            Operator::I32AtomicRmwXchg { ref memarg } => self.visit_i32_atomic_rmw_xchg(input, memarg),
+            Operator::I64AtomicRmwXchg { ref memarg } => self.visit_i64_atomic_rmw_xchg(input, memarg),
+            Operator::I32AtomicRmw8XchgU { ref memarg } => self.visit_i32_atomic_rmw8_xchg_u(input, memarg),
+            Operator::I32AtomicRmw16XchgU { ref memarg } => self.visit_i32_atomic_rmw16_xchg_u(input, memarg),
+            Operator::I64AtomicRmw8XchgU { ref memarg } => self.visit_i64_atomic_rmw8_xchg_u(input, memarg),
+            Operator::I64AtomicRmw16XchgU { ref memarg } => self.visit_i64_atomic_rmw16_xchg_u(input, memarg),
+            Operator::I64AtomicRmw32XchgU { ref memarg } => self.visit_i64_atomic_rmw32_xchg_u(input, memarg),
+            Operator::I32AtomicRmwCmpxchg { ref memarg } => self.visit_i32_atomic_rmw_cmpxchg(input, memarg),
+            Operator::I64AtomicRmwCmpxchg { ref memarg } => self.visit_i64_atomic_rmw_cmpxchg(input, memarg),
+            Operator::I32AtomicRmw8CmpxchgU { ref memarg } => self.visit_i32_atomic_rmw8_cmpxchg_u(input, memarg),
+            Operator::I32AtomicRmw16CmpxchgU { ref memarg } => self.visit_i32_atomic_rmw16_cmpxchg_u(input, memarg),
+            Operator::I64AtomicRmw8CmpxchgU { ref memarg } => self.visit_i64_atomic_rmw8_cmpxchg_u(input, memarg),
+            Operator::I64AtomicRmw16CmpxchgU { ref memarg } => self.visit_i64_atomic_rmw16_cmpxchg_u(input, memarg),
+            Operator::I64AtomicRmw32CmpxchgU { ref memarg } => self.visit_i64_atomic_rmw32_cmpxchg_u(input, memarg),
+            Operator::V128Load { ref memarg } => self.visit_v128_load(input, memarg),
+            Operator::V128Load8x8S { ref memarg } => self.visit_v128_load8x8_s(input, memarg),
+            Operator::V128Load8x8U { ref memarg } => self.visit_v128_load8x8_u(input, memarg),
+            Operator::V128Load16x4S { ref memarg } => self.visit_v128_load16x4_s(input, memarg),
+            Operator::V128Load16x4U { ref memarg } => self.visit_v128_load16x4_u(input, memarg),
+            Operator::V128Load32x2S { ref memarg } => self.visit_v128_load32x2_s(input, memarg),
+            Operator::V128Load32x2U { ref memarg } => self.visit_v128_load32x2_u(input, memarg),
+            Operator::V128Load8Splat { ref memarg } => self.visit_v128_load8_splat(input, memarg),
+            Operator::V128Load16Splat { ref memarg } => self.visit_v128_load16_splat(input, memarg),
+            Operator::V128Load32Splat { ref memarg } => self.visit_v128_load32_splat(input, memarg),
+            Operator::V128Load64Splat { ref memarg } => self.visit_v128_load64_splat(input, memarg),
+            Operator::V128Load32Zero { ref memarg } => self.visit_v128_load32_zero(input, memarg),
+            Operator::V128Load64Zero { ref memarg } => self.visit_v128_load64_zero(input, memarg),
+            Operator::V128Store { ref memarg } => self.visit_v128_store(input, memarg),
+            Operator::V128Load8Lane { ref memarg, lane } => self.visit_v128_load8_lane(input, memarg, lane),
+            Operator::V128Load16Lane { ref memarg, lane } => self.visit_v128_load16_lane(input, memarg, lane),
+            Operator::V128Load32Lane { ref memarg, lane } => self.visit_v128_load32_lane(input, memarg, lane),
+            Operator::V128Load64Lane { ref memarg, lane } => self.visit_v128_load64_lane(input, memarg, lane),
+            Operator::V128Store8Lane { ref memarg, lane } => self.visit_v128_store8_lane(input, memarg, lane),
+            Operator::V128Store16Lane { ref memarg, lane } => self.visit_v128_store16_lane(input, memarg, lane),
+            Operator::V128Store32Lane { ref memarg, lane } => self.visit_v128_store32_lane(input, memarg, lane),
+            Operator::V128Store64Lane { ref memarg, lane } => self.visit_v128_store64_lane(input, memarg, lane),
             Operator::V128Const { value } => self.visit_v128_const(input, value),
             Operator::I8x16Shuffle { lanes } => self.visit_i8x16_shuffle(input, lanes),
             Operator::I8x16ExtractLaneS { lane } => self.visit_i8x16_extract_lane_s(input, lane),
@@ -1777,29 +1777,29 @@ pub trait VisitOperator<'a, Input> {
     fn visit_local_tee(&mut self, input: Input, local_index: u32) -> Self::Output;
     fn visit_global_get(&mut self, input: Input, global_index: u32) -> Self::Output;
     fn visit_global_set(&mut self, input: Input, global_index: u32) -> Self::Output;
-    fn visit_i32_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_f32_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_f64_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_load8_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_load8_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_load16_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_load16_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load8_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load8_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load16_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load16_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load32_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_load32_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_f32_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_f64_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_store8(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_store16(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_store8(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_store16(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_store32(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_i32_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_f32_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_f64_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_load8_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_load8_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_load16_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_load16_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load8_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load8_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load16_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load16_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load32_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_load32_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_f32_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_f64_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_store8(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_store16(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_store8(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_store16(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_store32(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_memory_size(&mut self, input: Input, mem: u32, mem_byte: u8) -> Self::Output;
     fn visit_memory_grow(&mut self, input: Input, mem: u32, mem_byte: u8) -> Self::Output;
     fn visit_i32_const(&mut self, input: Input, value: i32) -> Self::Output;
@@ -1942,223 +1942,223 @@ pub trait VisitOperator<'a, Input> {
     fn visit_i64_extend8_s(&mut self, input: Input) -> Self::Output;
     fn visit_i64_extend16_s(&mut self, input: Input) -> Self::Output;
     fn visit_i64_extend32_s(&mut self, input: Input) -> Self::Output;
-    fn visit_i32_atomic_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_load16_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_load8_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_load32_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_load16_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_load8_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_store16(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_store8(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_store32(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_store16(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_store8(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_rmw_add(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_rmw_sub(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_rmw_and(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_rmw_or(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i32_atomic_rmw_xor(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_load16_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_load8_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_load32_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_load16_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_load8_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_store16(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_store8(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_store32(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_store16(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_store8(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_add(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_sub(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_and(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_or(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_xor(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_i32_atomic_rmw16_add_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw16_sub_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw16_and_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw16_or_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw16_xor_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw8_add_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw8_sub_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw8_and_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_i32_atomic_rmw8_or_u(&mut self, input: Input, memarg: MemoryImmediate)
+    fn visit_i32_atomic_rmw8_or_u(&mut self, input: Input, memarg: &MemoryImmediate)
         -> Self::Output;
     fn visit_i32_atomic_rmw8_xor_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_i64_atomic_rmw_add(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_rmw_sub(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_rmw_and(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_rmw_or(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_i64_atomic_rmw_xor(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_add(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_sub(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_and(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_or(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_xor(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_i64_atomic_rmw32_add_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw32_sub_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw32_and_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw32_or_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw32_xor_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_add_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_sub_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_and_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_or_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_xor_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw8_add_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw8_sub_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw8_and_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_i64_atomic_rmw8_or_u(&mut self, input: Input, memarg: MemoryImmediate)
+    fn visit_i64_atomic_rmw8_or_u(&mut self, input: Input, memarg: &MemoryImmediate)
         -> Self::Output;
     fn visit_i64_atomic_rmw8_xor_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_i32_atomic_rmw_xchg(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_i32_atomic_rmw_xchg(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_i32_atomic_rmw16_xchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw8_xchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw_cmpxchg(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw16_cmpxchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i32_atomic_rmw8_cmpxchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_i64_atomic_rmw_xchg(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_i64_atomic_rmw_xchg(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_i64_atomic_rmw32_xchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_xchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw8_xchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw_cmpxchg(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw32_cmpxchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw16_cmpxchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
     fn visit_i64_atomic_rmw8_cmpxchg_u(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
     ) -> Self::Output;
-    fn visit_memory_atomic_notify(&mut self, input: Input, memarg: MemoryImmediate)
+    fn visit_memory_atomic_notify(&mut self, input: Input, memarg: &MemoryImmediate)
         -> Self::Output;
-    fn visit_memory_atomic_wait32(&mut self, input: Input, memarg: MemoryImmediate)
+    fn visit_memory_atomic_wait32(&mut self, input: Input, memarg: &MemoryImmediate)
         -> Self::Output;
-    fn visit_memory_atomic_wait64(&mut self, input: Input, memarg: MemoryImmediate)
+    fn visit_memory_atomic_wait64(&mut self, input: Input, memarg: &MemoryImmediate)
         -> Self::Output;
     fn visit_atomic_fence(&mut self, input: Input, flags: u8) -> Self::Output;
     fn visit_ref_null(&mut self, input: Input, ty: ValType) -> Self::Output;
     fn visit_ref_is_null(&mut self, input: Input) -> Self::Output;
     fn visit_ref_func(&mut self, input: Input, function_index: u32) -> Self::Output;
-    fn visit_v128_load(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_store(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_v128_load(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_store(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_v128_const(&mut self, input: Input, value: V128) -> Self::Output;
     fn visit_i8x16_splat(&mut self, input: Input) -> Self::Output;
     fn visit_i16x8_splat(&mut self, input: Input) -> Self::Output;
@@ -2390,64 +2390,64 @@ pub trait VisitOperator<'a, Input> {
     fn visit_i8x16_swizzle(&mut self, input: Input) -> Self::Output;
     fn visit_i8x16_relaxed_swizzle(&mut self, input: Input) -> Self::Output;
     fn visit_i8x16_shuffle(&mut self, input: Input, lanes: [SIMDLaneIndex; 16]) -> Self::Output;
-    fn visit_v128_load8_splat(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load16_splat(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load32_splat(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load32_zero(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load64_splat(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load64_zero(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load8x8_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load8x8_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load16x4_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load16x4_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load32x2_s(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
-    fn visit_v128_load32x2_u(&mut self, input: Input, memarg: MemoryImmediate) -> Self::Output;
+    fn visit_v128_load8_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load16_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load32_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load32_zero(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load64_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load64_zero(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load8x8_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load8x8_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load16x4_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load16x4_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load32x2_s(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
+    fn visit_v128_load32x2_u(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_v128_load8_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_load16_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_load32_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_load64_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_store8_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_store16_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_store32_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_v128_store64_lane(
         &mut self,
         input: Input,
-        memarg: MemoryImmediate,
+        memarg: &MemoryImmediate,
         lane: SIMDLaneIndex,
     ) -> Self::Output;
     fn visit_memory_init(&mut self, input: Input, mem: u32, segment: u32) -> Self::Output;
