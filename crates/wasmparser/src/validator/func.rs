@@ -720,7 +720,7 @@ where
     fn visit_i64x2_shr_u(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i64x2_shr_u(offset)) }
     fn visit_i8x16_swizzle(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i8x16_swizzle(offset)) }
     fn visit_i8x16_relaxed_swizzle(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i8x16_relaxed_swizzle(offset)) }
-    fn visit_i8x16_shuffle(&mut self, offset: usize, lanes: [SIMDLaneIndex; 16]) -> Self::Output { forward!(self.visit_i8x16_shuffle(offset, lanes)) }
+    fn visit_i8x16_shuffle(&mut self, offset: usize, lanes: &[SIMDLaneIndex; 16]) -> Self::Output { forward!(self.visit_i8x16_shuffle(offset, lanes)) }
     fn visit_v128_load8_splat(&mut self, offset: usize, memarg: &MemoryImmediate) -> Self::Output { forward!(self.visit_v128_load8_splat(offset, memarg)) }
     fn visit_v128_load16_splat(&mut self, offset: usize, memarg: &MemoryImmediate) -> Self::Output { forward!(self.visit_v128_load16_splat(offset, memarg)) }
     fn visit_v128_load32_splat(&mut self, offset: usize, memarg: &MemoryImmediate) -> Self::Output { forward!(self.visit_v128_load32_splat(offset, memarg)) }

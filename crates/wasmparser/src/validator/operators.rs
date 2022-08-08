@@ -3460,13 +3460,13 @@ where
     fn visit_i8x16_shuffle(
         &mut self,
         (offset, _resources): (usize, T),
-        lanes: [SIMDLaneIndex; 16],
+        lanes: &[SIMDLaneIndex; 16],
     ) -> Self::Output {
         self.check_simd_enabled(offset)?;
         self.stack.pop_operand(offset, Some(ValType::V128))?;
         self.stack.pop_operand(offset, Some(ValType::V128))?;
         for i in lanes {
-            self.check_simd_lane_index(offset, i, 32)?;
+            self.check_simd_lane_index(offset, *i, 32)?;
         }
         self.stack.push_operand(offset, ValType::V128)?;
         Ok(())

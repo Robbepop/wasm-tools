@@ -1683,7 +1683,7 @@ impl<'a> BinaryReader<'a> {
                 for lane in &mut lanes {
                     *lane = self.read_lane_index(32)?
                 }
-                visitor.visit_i8x16_shuffle(pos, lanes)
+                visitor.visit_i8x16_shuffle(pos, &lanes)
             }
 
             0x0e => visitor.visit_i8x16_swizzle(pos),
@@ -2773,7 +2773,7 @@ impl<'a> VisitOperator<'a, usize> for OperatorFactory<'a> {
     fn visit_i64x2_shr_u(&mut self, _offset: usize) -> Self::Output { Operator::I64x2ShrU }
     fn visit_i8x16_swizzle(&mut self, _offset: usize) -> Self::Output { Operator::I8x16Swizzle }
     fn visit_i8x16_relaxed_swizzle(&mut self, _offset: usize) -> Self::Output { Operator::I8x16RelaxedSwizzle }
-    fn visit_i8x16_shuffle(&mut self, _offset: usize, lanes: [SIMDLaneIndex; 16]) -> Self::Output { Operator::I8x16Shuffle { lanes } }
+    fn visit_i8x16_shuffle(&mut self, _offset: usize, lanes: &[SIMDLaneIndex; 16]) -> Self::Output { Operator::I8x16Shuffle { lanes: *lanes } }
     fn visit_v128_load8_splat(&mut self, _offset: usize, memarg: &MemoryImmediate) -> Self::Output { Operator::V128Load8Splat { memarg: *memarg } }
     fn visit_v128_load16_splat(&mut self, _offset: usize, memarg: &MemoryImmediate) -> Self::Output { Operator::V128Load16Splat { memarg: *memarg } }
     fn visit_v128_load32_splat(&mut self, _offset: usize, memarg: &MemoryImmediate) -> Self::Output { Operator::V128Load32Splat { memarg: *memarg } }

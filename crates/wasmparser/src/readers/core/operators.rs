@@ -1504,7 +1504,7 @@ pub trait VisitOperator<'a, Input> {
             Operator::V128Store32Lane { ref memarg, lane } => self.visit_v128_store32_lane(input, memarg, lane),
             Operator::V128Store64Lane { ref memarg, lane } => self.visit_v128_store64_lane(input, memarg, lane),
             Operator::V128Const { value } => self.visit_v128_const(input, value),
-            Operator::I8x16Shuffle { lanes } => self.visit_i8x16_shuffle(input, lanes),
+            Operator::I8x16Shuffle { ref lanes } => self.visit_i8x16_shuffle(input, lanes),
             Operator::I8x16ExtractLaneS { lane } => self.visit_i8x16_extract_lane_s(input, lane),
             Operator::I8x16ExtractLaneU { lane } => self.visit_i8x16_extract_lane_u(input, lane),
             Operator::I8x16ReplaceLane { lane } => self.visit_i8x16_replace_lane(input, lane),
@@ -2389,7 +2389,7 @@ pub trait VisitOperator<'a, Input> {
     fn visit_i64x2_shr_u(&mut self, input: Input) -> Self::Output;
     fn visit_i8x16_swizzle(&mut self, input: Input) -> Self::Output;
     fn visit_i8x16_relaxed_swizzle(&mut self, input: Input) -> Self::Output;
-    fn visit_i8x16_shuffle(&mut self, input: Input, lanes: [SIMDLaneIndex; 16]) -> Self::Output;
+    fn visit_i8x16_shuffle(&mut self, input: Input, lanes: &[SIMDLaneIndex; 16]) -> Self::Output;
     fn visit_v128_load8_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_v128_load16_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
     fn visit_v128_load32_splat(&mut self, input: Input, memarg: &MemoryImmediate) -> Self::Output;
