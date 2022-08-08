@@ -490,7 +490,7 @@ where
     fn visit_ref_func(&mut self, offset: usize,  function_index: u32) -> Self::Output { forward!(self.visit_ref_func(offset, function_index)) }
     fn visit_v128_load(&mut self, offset: usize, memarg: &MemoryImmediate) -> Self::Output { forward!(self.visit_v128_load(offset, memarg)) }
     fn visit_v128_store(&mut self, offset: usize, memarg: &MemoryImmediate) -> Self::Output { forward!(self.visit_v128_store(offset, memarg)) }
-    fn visit_v128_const(&mut self, offset: usize, value: V128) -> Self::Output { forward!(self.visit_v128_const(offset, value)) }
+    fn visit_v128_const(&mut self, offset: usize, value: &V128) -> Self::Output { forward!(self.visit_v128_const(offset, value)) }
     fn visit_i8x16_splat(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i8x16_splat(offset)) }
     fn visit_i16x8_splat(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i16x8_splat(offset)) }
     fn visit_i32x4_splat(&mut self, offset: usize) -> Self::Output { forward!(self.visit_i32x4_splat(offset)) }

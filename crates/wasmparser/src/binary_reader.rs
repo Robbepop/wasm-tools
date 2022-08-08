@@ -1677,7 +1677,7 @@ impl<'a> BinaryReader<'a> {
             0x0a => visitor.visit_v128_load64_splat(pos, &self.read_memarg_of_align(3)?),
 
             0x0b => visitor.visit_v128_store(pos, &self.read_memarg()?),
-            0x0c => visitor.visit_v128_const(pos, self.read_v128()?),
+            0x0c => visitor.visit_v128_const(pos, &self.read_v128()?),
             0x0d => {
                 let mut lanes: [SIMDLaneIndex; 16] = [0; 16];
                 for lane in &mut lanes {
@@ -2543,7 +2543,7 @@ impl<'a> VisitOperator<'a, usize> for OperatorFactory<'a> {
     fn visit_ref_func(&mut self, _offset: usize,  function_index: u32) -> Self::Output { Operator::RefFunc { function_index } }
     fn visit_v128_load(&mut self, _offset: usize, memarg: &MemoryImmediate) -> Self::Output { Operator::V128Load { memarg: *memarg } }
     fn visit_v128_store(&mut self, _offset: usize, memarg: &MemoryImmediate) -> Self::Output { Operator::V128Store { memarg: *memarg } }
-    fn visit_v128_const(&mut self, _offset: usize, value: V128) -> Self::Output { Operator::V128Const { value } }
+    fn visit_v128_const(&mut self, _offset: usize, value: &V128) -> Self::Output { Operator::V128Const { value: *value } }
     fn visit_i8x16_splat(&mut self, _offset: usize) -> Self::Output { Operator::I8x16Splat }
     fn visit_i16x8_splat(&mut self, _offset: usize) -> Self::Output { Operator::I16x8Splat }
     fn visit_i32x4_splat(&mut self, _offset: usize) -> Self::Output { Operator::I32x4Splat }

@@ -2546,7 +2546,7 @@ where
         self.stack.pop_operand(offset, Some(ty))?;
         Ok(())
     }
-    fn visit_v128_const(&mut self, (offset, _resources): (usize, T), _value: V128) -> Self::Output {
+    fn visit_v128_const(&mut self, (offset, _resources): (usize, T), _value: &V128) -> Self::Output {
         self.check_simd_enabled(offset)?;
         self.stack.push_operand(offset, ValType::V128)?;
         Ok(())
