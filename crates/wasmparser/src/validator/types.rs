@@ -418,6 +418,17 @@ impl Hash for (dyn ModuleImportKey + '_) {
     }
 }
 
+impl Ord for (dyn ModuleImportKey + '_) {
+    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+        self.module().cmp(other.module()).then(self.name().cmp(other.name()))
+    }
+}
+impl PartialOrd for (dyn ModuleImportKey + '_) {
+    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
 impl PartialEq for (dyn ModuleImportKey + '_) {
     fn eq(&self, other: &Self) -> bool {
         self.module() == other.module() && self.name() == other.name()

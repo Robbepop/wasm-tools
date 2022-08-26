@@ -13,7 +13,7 @@ edition = "2021"
 exclude = ["benches/*.wasm"]
 
 [dependencies]
-indexmap = "1.8.0"
+indexmap = { version = "0.4.0", package = "indexmap-nostd" }
 
 [dev-dependencies]
 anyhow = "1.0"
