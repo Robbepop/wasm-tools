@@ -6,16 +6,16 @@ use crate::{
     ExternalKind, FuncType, GlobalType, Import, MemoryType, PrimitiveValType, TableType, TypeRef,
     ValType,
 };
-use indexmap::{IndexMap, IndexSet};
+use ::alloc::boxed::Box;
+use ::alloc::string::String;
+use ::alloc::sync::Arc;
+use ::alloc::vec::Vec;
 use ::core::{
     borrow::Borrow,
     hash::{Hash, Hasher},
     mem,
 };
-use ::alloc::sync::Arc;
-use ::alloc::vec::Vec;
-use ::alloc::string::String;
-use ::alloc::boxed::Box;
+use indexmap::{IndexMap, IndexSet};
 
 /// The maximum number of parameters in the canonical ABI that can be passed by value.
 ///
@@ -423,7 +423,9 @@ impl Hash for (dyn ModuleImportKey + '_) {
 
 impl Ord for (dyn ModuleImportKey + '_) {
     fn cmp(&self, other: &Self) -> ::core::cmp::Ordering {
-        self.module().cmp(other.module()).then(self.name().cmp(other.name()))
+        self.module()
+            .cmp(other.module())
+            .then(self.name().cmp(other.name()))
     }
 }
 impl PartialOrd for (dyn ModuleImportKey + '_) {

@@ -1,6 +1,6 @@
 use crate::{BinaryReader, Result, SectionIteratorLimited, SectionReader, SectionWithLimitedItems};
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
+use ::core::ops::Range;
 
 /// Represents options for component functions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

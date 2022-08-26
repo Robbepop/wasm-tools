@@ -12,12 +12,12 @@ use crate::{
     MemoryType, Result, TableType, TagType, TypeRef, ValType, VisitOperator, WasmFeatures,
     WasmModuleResources, V128,
 };
-use indexmap::IndexMap;
-use ::alloc::{collections::BTreeSet, sync::Arc};
+use ::alloc::format;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
 use ::alloc::vec::Vec;
-use ::alloc::format;
+use ::alloc::{collections::BTreeSet, sync::Arc};
+use indexmap::IndexMap;
 
 fn check_value_type(ty: ValType, features: &WasmFeatures, offset: usize) -> Result<()> {
     match features.check_value_type(ty) {
@@ -1060,8 +1060,8 @@ const _: () = {
 };
 
 mod arc {
-    use ::core::ops::Deref;
     use ::alloc::sync::Arc;
+    use ::core::ops::Deref;
 
     enum Inner<T> {
         Owned(T),

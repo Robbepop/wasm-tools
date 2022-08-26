@@ -2,8 +2,8 @@ use crate::{
     BinaryReader, ComponentExport, ComponentExternalKind, Export, Result, SectionIteratorLimited,
     SectionReader, SectionWithLimitedItems,
 };
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
+use ::core::ops::Range;
 
 /// Represents the kind of an instantiation argument for a core instance.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]

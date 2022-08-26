@@ -2,8 +2,8 @@ use crate::{
     Alias, BinaryReader, ComponentAlias, ComponentImport, ComponentTypeRef, FuncType, Import,
     Result, SectionIteratorLimited, SectionReader, SectionWithLimitedItems, Type, TypeRef,
 };
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
+use ::core::ops::Range;
 
 /// Represents a core type in a WebAssembly component.
 #[derive(Debug, Clone)]

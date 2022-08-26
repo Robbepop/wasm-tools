@@ -19,14 +19,14 @@ use crate::{
     ComponentTypeRef, ExternalKind, FuncType, GlobalType, InstantiationArgKind, MemoryType, Result,
     TableType, TypeBounds, ValType, WasmFeatures,
 };
-use indexmap::{IndexMap, IndexSet};
-use ::alloc::{collections::BTreeSet};
-use ::core::mem;
-use ::alloc::string::String;
-use ::alloc::vec::Vec;
 use ::alloc::borrow::ToOwned;
-use ::alloc::string::ToString;
+use ::alloc::collections::BTreeSet;
 use ::alloc::format;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::vec::Vec;
+use ::core::mem;
+use indexmap::{IndexMap, IndexSet};
 
 pub(crate) struct ComponentState {
     // Core index spaces

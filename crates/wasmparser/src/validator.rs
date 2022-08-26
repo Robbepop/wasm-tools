@@ -17,11 +17,11 @@ use crate::{
     limits::*, BinaryReaderError, Encoding, FunctionBody, Parser, Payload, Result, SectionReader,
     SectionWithLimitedItems, ValType, WASM_COMPONENT_VERSION, WASM_MODULE_VERSION,
 };
-use ::core::mem;
-use ::core::ops::Range;
+use ::alloc::format;
 use ::alloc::sync::Arc;
 use ::alloc::vec::Vec;
-use ::alloc::format;
+use ::core::mem;
+use ::core::ops::Range;
 
 /// Test whether the given buffer contains a valid WebAssembly module or component,
 /// analogous to [`WebAssembly.validate`][js] in the JS API.

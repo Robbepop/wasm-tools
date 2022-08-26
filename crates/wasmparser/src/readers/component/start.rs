@@ -1,6 +1,6 @@
 use crate::{BinaryReader, Result, SectionReader};
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
+use ::core::ops::Range;
 
 /// Represents the start function in a WebAssembly component.
 #[derive(Debug, Clone)]
