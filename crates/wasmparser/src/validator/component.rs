@@ -20,7 +20,13 @@ use crate::{
     TableType, TypeBounds, ValType, WasmFeatures,
 };
 use indexmap::{IndexMap, IndexSet};
-use std::{collections::HashSet, mem};
+use ::alloc::{collections::BTreeSet};
+use ::core::mem;
+use ::alloc::string::String;
+use ::alloc::vec::Vec;
+use ::alloc::borrow::ToOwned;
+use ::alloc::string::ToString;
+use ::alloc::format;
 
 pub(crate) struct ComponentState {
     // Core index spaces
@@ -910,7 +916,7 @@ impl ComponentState {
     ) -> Result<ComponentFuncType> {
         let mut type_size = 1;
 
-        let mut set = HashSet::with_capacity(std::cmp::max(ty.params.len(), ty.results.len()));
+        let mut set = BTreeSet::new();
 
         let params = ty
             .params

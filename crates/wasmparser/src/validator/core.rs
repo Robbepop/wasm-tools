@@ -13,7 +13,11 @@ use crate::{
     WasmModuleResources, V128,
 };
 use indexmap::IndexMap;
-use std::{collections::HashSet, sync::Arc};
+use ::alloc::{collections::BTreeSet, sync::Arc};
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::vec::Vec;
+use ::alloc::format;
 
 fn check_value_type(ty: ValType, features: &WasmFeatures, offset: usize) -> Result<()> {
     match features.check_value_type(ty) {
@@ -434,7 +438,7 @@ pub(crate) struct Module {
     // Stores indexes into `types`.
     pub functions: Vec<u32>,
     pub tags: Vec<TypeId>,
-    pub function_references: HashSet<u32>,
+    pub function_references: BTreeSet<u32>,
     pub imports: IndexMap<(String, String), Vec<EntityType>>,
     pub exports: IndexMap<String, EntityType>,
     pub type_size: usize,
@@ -1056,8 +1060,8 @@ const _: () = {
 };
 
 mod arc {
-    use std::ops::Deref;
-    use std::sync::Arc;
+    use ::core::ops::Deref;
+    use ::alloc::sync::Arc;
 
     enum Inner<T> {
         Owned(T),
@@ -1099,7 +1103,7 @@ mod arc {
                 return;
             }
 
-            let inner = std::mem::replace(&mut self.inner, Inner::Empty);
+            let inner = ::core::mem::replace(&mut self.inner, Inner::Empty);
             let x = match inner {
                 Inner::Owned(x) => x,
                 _ => Self::unreachable(),

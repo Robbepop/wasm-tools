@@ -7,12 +7,15 @@ use crate::{
     ValType,
 };
 use indexmap::{IndexMap, IndexSet};
-use std::{
+use ::core::{
     borrow::Borrow,
     hash::{Hash, Hasher},
     mem,
-    sync::Arc,
 };
+use ::alloc::sync::Arc;
+use ::alloc::vec::Vec;
+use ::alloc::string::String;
+use ::alloc::boxed::Box;
 
 /// The maximum number of parameters in the canonical ABI that can be passed by value.
 ///
@@ -419,12 +422,12 @@ impl Hash for (dyn ModuleImportKey + '_) {
 }
 
 impl Ord for (dyn ModuleImportKey + '_) {
-    fn cmp(&self, other: &Self) -> std::cmp::Ordering {
+    fn cmp(&self, other: &Self) -> ::core::cmp::Ordering {
         self.module().cmp(other.module()).then(self.name().cmp(other.name()))
     }
 }
 impl PartialOrd for (dyn ModuleImportKey + '_) {
-    fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
+    fn partial_cmp(&self, other: &Self) -> Option<::core::cmp::Ordering> {
         Some(self.cmp(other))
     }
 }
@@ -1870,7 +1873,7 @@ impl<T> SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::Index<usize> for SnapshotList<T> {
+impl<T> ::core::ops::Index<usize> for SnapshotList<T> {
     type Output = T;
 
     fn index(&self, index: usize) -> &T {
@@ -1878,13 +1881,13 @@ impl<T> std::ops::Index<usize> for SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::IndexMut<usize> for SnapshotList<T> {
+impl<T> ::core::ops::IndexMut<usize> for SnapshotList<T> {
     fn index_mut(&mut self, index: usize) -> &mut T {
         self.get_mut(index).unwrap()
     }
 }
 
-impl<T> std::ops::Index<TypeId> for SnapshotList<T> {
+impl<T> ::core::ops::Index<TypeId> for SnapshotList<T> {
     type Output = T;
 
     fn index(&self, id: TypeId) -> &T {
@@ -1892,7 +1895,7 @@ impl<T> std::ops::Index<TypeId> for SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::IndexMut<TypeId> for SnapshotList<T> {
+impl<T> ::core::ops::IndexMut<TypeId> for SnapshotList<T> {
     fn index_mut(&mut self, id: TypeId) -> &mut T {
         self.get_mut(id.index).unwrap()
     }

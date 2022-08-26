@@ -14,11 +14,18 @@
  */
 
 use crate::{limits::*, *};
-use std::convert::TryInto;
-use std::error::Error;
-use std::fmt;
-use std::ops::Range;
-use std::str;
+use ::core::convert::TryInto;
+use ::core::fmt;
+use ::core::ops::Range;
+use ::core::str;
+use ::alloc::vec::Vec;
+use ::alloc::boxed::Box;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::format;
+
+#[cfg(feature = "std")]
+use ::std::error::Error;
 
 fn is_name(name: &str, expected: &'static str) -> bool {
     name == expected
@@ -47,8 +54,9 @@ pub(crate) struct BinaryReaderErrorInner {
 }
 
 /// The result for `BinaryReader` operations.
-pub type Result<T, E = BinaryReaderError> = std::result::Result<T, E>;
+pub type Result<T, E = BinaryReaderError> = ::core::result::Result<T, E>;
 
+#[cfg(feature = "std")]
 impl Error for BinaryReaderError {}
 
 impl fmt::Display for BinaryReaderError {
@@ -1352,7 +1360,7 @@ impl<'a> BinaryReader<'a> {
 
         // Not empty or a singular type, so read the function type index
         let idx = self.read_var_s33()?;
-        if idx < 0 || idx > (std::u32::MAX as i64) {
+        if idx < 0 || idx > (::core::u32::MAX as i64) {
             return Err(BinaryReaderError::new(
                 "invalid function type",
                 self.original_position(),

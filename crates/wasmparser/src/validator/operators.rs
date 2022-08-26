@@ -26,7 +26,10 @@ use crate::{
     limits::MAX_WASM_FUNCTION_LOCALS, BinaryReaderError, BlockType, BrTable, Ieee32, Ieee64,
     MemArg, Result, ValType, VisitOperator, WasmFeatures, WasmFuncType, WasmModuleResources, V128,
 };
-use std::ops::{Deref, DerefMut};
+use ::core::ops::{Deref, DerefMut};
+use ::alloc::vec::Vec;
+use ::alloc::vec;
+use ::alloc::format;
 
 /// Create a `BinaryReaderError` with a format string.
 macro_rules! format_op_err {

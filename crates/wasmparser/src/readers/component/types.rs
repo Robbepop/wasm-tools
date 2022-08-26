@@ -2,7 +2,8 @@ use crate::{
     Alias, BinaryReader, ComponentAlias, ComponentImport, ComponentTypeRef, FuncType, Import,
     Result, SectionIteratorLimited, SectionReader, SectionWithLimitedItems, Type, TypeRef,
 };
-use std::ops::Range;
+use ::core::ops::Range;
+use ::alloc::boxed::Box;
 
 /// Represents a core type in a WebAssembly component.
 #[derive(Debug, Clone)]
@@ -292,7 +293,7 @@ impl TypeVec<'_> {
         }
 
         match self {
-            Self::Unnamed(ty) => Either::Left(std::iter::once(ty).map(|ty| (None, ty))),
+            Self::Unnamed(ty) => Either::Left(::core::iter::once(ty).map(|ty| (None, ty))),
             Self::Named(vec) => Either::Right(vec.iter().map(|(n, ty)| (Some(*n), ty))),
         }
     }
