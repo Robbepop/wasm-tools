@@ -44,7 +44,7 @@ extern crate alloc;
 /// ```
 /// // These names are referred to by the types of each payload and must
 /// // be imported into the module using the `for_each_operator!` macro.
-/// use wasmparser::{V128, MemArg, BlockType, ValType, BrTable, Ieee32, Ieee64};
+/// use wasmparser_nostd::{V128, MemArg, BlockType, ValType, BrTable, Ieee32, Ieee64};
 ///
 /// macro_rules! define_visit_operator {
 ///     // The outer layer of repetition represents how all operators are
@@ -68,10 +68,10 @@ extern crate alloc;
 ///
 /// pub struct VisitAndDoNothing;
 ///
-/// impl<'a> wasmparser::VisitOperator<'a> for VisitAndDoNothing {
+/// impl<'a> wasmparser_nostd::VisitOperator<'a> for VisitAndDoNothing {
 ///     type Output = ();
 ///
-///     wasmparser::for_each_operator!(define_visit_operator);
+///     wasmparser_nostd::for_each_operator!(define_visit_operator);
 /// }
 /// ```
 #[macro_export]
