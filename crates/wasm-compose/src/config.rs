@@ -145,13 +145,13 @@ mod de {
         de::{self, MapAccess, Visitor},
         Deserialize, Deserializer,
     };
-    use std::{fmt, hash::Hash, marker::PhantomData, str::FromStr};
+    use std::{fmt, marker::PhantomData, str::FromStr};
 
     /// Utility function for deserializing index maps where the values can
     /// be deserialized either from a string or from a map value.
     pub fn index_map<'de, K, V, D>(deserializer: D) -> Result<IndexMap<K, V>, D::Error>
     where
-        K: Hash + Eq + Deserialize<'de>,
+        K: Ord + Eq + Clone + Deserialize<'de>,
         V: Deserialize<'de> + FromStr<Err = ()>,
         D: Deserializer<'de>,
     {
@@ -162,7 +162,7 @@ mod de {
 
     impl<'de, K, V> Visitor<'de> for MapVisitor<K, V>
     where
-        K: Hash + Eq + Deserialize<'de>,
+        K: Ord + Eq + Clone + Deserialize<'de>,
         V: Deserialize<'de> + FromStr<Err = ()>,
     {
         type Value = IndexMap<K, V>;

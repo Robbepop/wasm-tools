@@ -24,6 +24,13 @@
 //! a data-structure using this library.
 
 #![deny(missing_docs)]
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(feature = "std")]
+extern crate std as alloc;
+
+#[cfg(not(feature = "std"))]
+extern crate alloc;
 
 /// A helper macro to conveniently iterate over all opcodes recognized by this
 /// crate. This can be used to work with either the [`Operator`] enumeration or

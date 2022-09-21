@@ -17,7 +17,7 @@ use crate::{
     BinaryReader, ConstExpr, GlobalType, Result, SectionIteratorLimited, SectionReader,
     SectionWithLimitedItems,
 };
-use std::ops::Range;
+use ::core::ops::Range;
 
 /// Represents a core WebAssembly global.
 #[derive(Debug, Copy, Clone)]

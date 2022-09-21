@@ -280,14 +280,14 @@ impl std::fmt::Debug for Component {
 }
 
 /// Represents an index into an instantiation graph's `components` collection.
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Copy, Eq, PartialEq, PartialOrd, Ord, Hash)]
 pub(crate) struct ComponentIndex(usize);
 
 /// An instance index into an instantiation graph.
 pub(crate) type InstanceIndex = NodeIndex;
 
 /// Represents an index into a component's imports collection.
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Copy, Eq, PartialEq, PartialOrd, Ord, Hash)]
 pub(crate) struct ImportIndex(usize);
 
 /// Represents an index into a component's exports collection.
@@ -295,7 +295,7 @@ pub(crate) struct ImportIndex(usize);
 pub(crate) struct ExportIndex(usize);
 
 /// A reference to an import on a component
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Copy, Eq, PartialEq, PartialOrd, Ord, Hash)]
 pub(crate) struct ImportRef {
     /// The index of the component with the import.
     pub(crate) component: ComponentIndex,
@@ -779,7 +779,7 @@ impl<'a> InstantiationGraphBuilder<'a> {
 
                 // Ensure every explicit argument is a valid import name
                 if let Some(config) = config {
-                    for arg in config.arguments.keys() {
+                    for arg in config.arguments.iter().map(|(key, _)| key) {
                         if !comp.imports.contains_key(arg) {
                             bail!(
                                 "component `{path}` has no import named `{arg}`",

@@ -14,8 +14,10 @@
  */
 
 use crate::{BinaryReader, Result, SectionIteratorLimited, SectionReader, SectionWithLimitedItems};
-use std::fmt::Debug;
-use std::ops::Range;
+use ::core::fmt::Debug;
+use ::core::ops::Range;
+use ::alloc::boxed::Box;
+use ::alloc::vec::Vec;
 
 /// Represents the types of values in a WebAssembly module.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -63,7 +65,7 @@ pub struct FuncType {
 }
 
 impl Debug for FuncType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
         f.debug_struct("FuncType")
             .field("params", &self.params())
             .field("returns", &self.results())
