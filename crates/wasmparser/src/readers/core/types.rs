@@ -14,10 +14,10 @@
  */
 
 use crate::{BinaryReader, Result, SectionIteratorLimited, SectionReader, SectionWithLimitedItems};
-use ::core::fmt::Debug;
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
 use ::alloc::vec::Vec;
+use ::core::fmt::Debug;
+use ::core::ops::Range;
 
 /// Represents the types of values in a WebAssembly module.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]

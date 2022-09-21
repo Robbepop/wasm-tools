@@ -2,8 +2,8 @@ use crate::{
     BinaryReader, ComponentAlias, ComponentImport, ComponentTypeRef, FuncType, Import, Result,
     SectionIteratorLimited, SectionReader, SectionWithLimitedItems, Type, TypeRef,
 };
-use ::core::ops::Range;
 use ::alloc::boxed::Box;
+use ::core::ops::Range;
 
 /// Represents the kind of an outer core alias in a WebAssembly component.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]

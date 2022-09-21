@@ -8,11 +8,11 @@ use crate::{
     InstanceSectionReader, MemorySectionReader, Result, TableSectionReader, TagSectionReader,
     TypeSectionReader,
 };
+use ::alloc::vec::Vec;
 use ::core::convert::TryInto;
 use ::core::fmt;
 use ::core::iter;
 use ::core::ops::Range;
-use ::alloc::vec::Vec;
 
 pub(crate) const WASM_EXPERIMENTAL_VERSION: u32 = 0xd;
 pub(crate) const WASM_MODULE_VERSION: u32 = 0x1;
