@@ -22,7 +22,7 @@ indexmap = { version = "0.4.0", package = "indexmap-nostd" }
 leb128 = "0.2.4"
 serde = { version = "1", features = ['derive'], optional = true }
 wasm-encoder = { version = "0.17.0", path = "../wasm-encoder" }
-wasmparser = { version = "0.91.0", path = "../wasmparser" }
+wasmparser = { version = "0.91.0", path = "../wasmparser", package = "wasmparser-nostd" }
 
 [dev-dependencies]
 criterion = "0.3.3"
