@@ -7,9 +7,9 @@ use once_cell::unsync::Lazy;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
-use wasmparser::{
-    BlockType, BrTable, DataKind, ElementKind, Ieee32, Ieee64, MemArg, Parser, Payload, ValType,
-    Validator, VisitOperator, WasmFeatures, V128,
+use wasmparser_nostd::{
+    DataKind, ElementKind, Parser, Payload,
+    Validator, VisitOperator, WasmFeatures,
 };
 
 /// A benchmark input.
@@ -338,5 +338,5 @@ macro_rules! define_visit_operator {
 impl<'a> VisitOperator<'a> for NopVisit {
     type Output = ();
 
-    wasmparser::for_each_operator!(define_visit_operator);
+    wasmparser_nostd::for_each_operator!(define_visit_operator);
 }
