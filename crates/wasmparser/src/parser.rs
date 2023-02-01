@@ -7,10 +7,11 @@ use crate::{
     GlobalSectionReader, ImportSectionReader, InstanceSectionReader, MemorySectionReader, Result,
     SectionLimited, TableSectionReader, TagSectionReader, TypeSectionReader,
 };
-use std::convert::TryInto;
-use std::fmt;
-use std::iter;
-use std::ops::Range;
+use ::core::convert::TryInto;
+use ::core::fmt;
+use ::core::iter;
+use ::core::ops::Range;
+use ::alloc::vec::Vec;
 
 pub(crate) const WASM_MODULE_VERSION: u16 = 0x1;
 
@@ -824,7 +825,7 @@ impl Parser {
     ///
     /// ```
     /// use wasmparser::{Result, Parser, Chunk, Payload::*};
-    /// use std::ops::Range;
+    /// use ::core::ops::Range;
     ///
     /// fn objdump_headers(mut wasm: &[u8]) -> Result<()> {
     ///     let mut parser = Parser::new(0);

@@ -3,6 +3,7 @@ use crate::{
     BinaryReader, ComponentExport, ComponentExternalKind, Export, FromReader, Result,
     SectionLimited,
 };
+use ::alloc::boxed::Box;
 
 /// Represents the kind of an instantiation argument for a core instance.
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]

@@ -6,16 +6,23 @@ use crate::{
     MemoryType, PrimitiveValType, TableType, TypeRef, ValType,
 };
 use indexmap::{IndexMap, IndexSet};
-use std::collections::HashMap;
-use std::{
+use ::core::{
     borrow::Borrow,
     fmt,
     hash::{Hash, Hasher},
     mem,
     ops::{Deref, DerefMut},
+};
+use ::alloc::{
     sync::Arc,
 };
 use url::Url;
+use ::alloc::boxed::Box;
+use ::alloc::vec::Vec;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::borrow::ToOwned;
+use ::alloc::collections::BTreeMap;
 
 /// The maximum number of parameters in the canonical ABI that can be passed by value.
 ///
@@ -59,7 +66,7 @@ impl KebabStr {
     pub(crate) fn new_unchecked<'a>(s: impl AsRef<str> + 'a) -> &'a Self {
         // Safety: `KebabStr` is a transparent wrapper around `str`
         // Therefore transmuting `&str` to `&KebabStr` is safe.
-        unsafe { std::mem::transmute::<_, &Self>(s.as_ref()) }
+        unsafe { ::core::mem::transmute::<_, &Self>(s.as_ref()) }
     }
 
     /// Gets the underlying string slice.
@@ -376,7 +383,7 @@ pub struct TypeId {
 // The size of `TypeId` was seen to have a large-ish impact in #844, so this
 // assert ensures that it stays relatively small.
 const _: () = {
-    assert!(std::mem::size_of::<TypeId>() <= 16);
+    assert!(::core::mem::size_of::<TypeId>() <= 16);
 };
 
 /// A unified type definition for validating WebAssembly modules and components.
@@ -2019,14 +2026,14 @@ pub(crate) struct SnapshotList<T> {
     // The current list of types for the current snapshot that are being built.
     cur: Vec<T>,
 
-    unique_mappings: HashMap<u32, u32>,
+    unique_mappings: BTreeMap<u32, u32>,
     unique_counter: u32,
 }
 
 struct Snapshot<T> {
     prior_types: usize,
     unique_counter: u32,
-    unique_mappings: HashMap<u32, u32>,
+    unique_mappings: BTreeMap<u32, u32>,
     items: Vec<T>,
 }
 
@@ -2111,7 +2118,7 @@ impl<T> SnapshotList<T> {
         SnapshotList {
             snapshots: self.snapshots.clone(),
             snapshots_total: self.snapshots_total,
-            unique_mappings: HashMap::new(),
+            unique_mappings: BTreeMap::new(),
             unique_counter: self.unique_counter,
             cur: Vec::new(),
         }
@@ -2159,7 +2166,7 @@ impl<T> SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::Index<usize> for SnapshotList<T> {
+impl<T> ::core::ops::Index<usize> for SnapshotList<T> {
     type Output = T;
 
     #[inline]
@@ -2168,14 +2175,14 @@ impl<T> std::ops::Index<usize> for SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::IndexMut<usize> for SnapshotList<T> {
+impl<T> ::core::ops::IndexMut<usize> for SnapshotList<T> {
     #[inline]
     fn index_mut(&mut self, index: usize) -> &mut T {
         self.get_mut(index).unwrap()
     }
 }
 
-impl<T> std::ops::Index<TypeId> for SnapshotList<T> {
+impl<T> ::core::ops::Index<TypeId> for SnapshotList<T> {
     type Output = T;
 
     #[inline]
@@ -2184,7 +2191,7 @@ impl<T> std::ops::Index<TypeId> for SnapshotList<T> {
     }
 }
 
-impl<T> std::ops::IndexMut<TypeId> for SnapshotList<T> {
+impl<T> ::core::ops::IndexMut<TypeId> for SnapshotList<T> {
     #[inline]
     fn index_mut(&mut self, id: TypeId) -> &mut T {
         self.get_mut(id.index).unwrap()
@@ -2198,7 +2205,7 @@ impl<T> Default for SnapshotList<T> {
             snapshots_total: 0,
             cur: Vec::new(),
             unique_counter: 1,
-            unique_mappings: HashMap::new(),
+            unique_mappings: BTreeMap::new(),
         }
     }
 }
