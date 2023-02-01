@@ -42,7 +42,7 @@ pub enum Instance<'a> {
 /// # Examples
 ///
 /// ```
-/// use wasmparser::InstanceSectionReader;
+/// use wasmparser_nostd::InstanceSectionReader;
 /// # let data: &[u8] = &[0x01, 0x00, 0x00, 0x01, 0x03, b'f', b'o', b'o', 0x12, 0x00];
 /// let mut reader = InstanceSectionReader::new(data, 0).unwrap();
 /// for inst in reader {
@@ -119,7 +119,7 @@ pub enum ComponentInstance<'a> {
 /// # Examples
 ///
 /// ```
-/// use wasmparser::ComponentInstanceSectionReader;
+/// use wasmparser_nostd::ComponentInstanceSectionReader;
 /// # let data: &[u8] = &[0x01, 0x00, 0x00, 0x01, 0x03, b'f', b'o', b'o', 0x01, 0x00];
 /// let mut reader = ComponentInstanceSectionReader::new(data, 0).unwrap();
 /// for inst in reader {

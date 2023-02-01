@@ -18,4 +18,4 @@ leb128 = { workspace = true }
 [dev-dependencies]
 anyhow = { workspace = true }
 tempfile = "3.2.0"
-wasmparser = { path = "../wasmparser" }
+wasmparser = { path = "../wasmparser", package = "wasmparser-nostd" }

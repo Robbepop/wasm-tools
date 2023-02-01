@@ -27,7 +27,7 @@ use ::alloc::vec::Vec;
 ///
 /// This functions requires the bytes to validate are entirely resident in memory.
 /// Additionally this validates the given bytes with the default set of WebAssembly
-/// features implemented by `wasmparser`.
+/// features implemented by `wasmparser_nostd`.
 ///
 /// For more fine-tuned control over validation it's recommended to review the
 /// documentation of [`Validator`].
