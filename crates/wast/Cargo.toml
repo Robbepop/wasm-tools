@@ -21,7 +21,7 @@ wasm-encoder = { workspace = true }
 [dev-dependencies]
 anyhow = { workspace = true }
 rayon = { workspace = true }
-wasmparser = { path = "../wasmparser" }
+wasmparser = { path = "../wasmparser", package = "wasmparser-nostd" }
 wat = { path = "../wat" }
 
 [features]

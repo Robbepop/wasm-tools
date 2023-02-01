@@ -190,7 +190,7 @@ impl<'a, T> Clone for WasmFuncTypeOutputs<'a, T> {
 ///
 /// # Note
 ///
-/// The `wasmparser` crate provides a builtin validation framework but allows
+/// The `wasmparser_nostd` crate provides a builtin validation framework but allows
 /// users of this crate to also feed the parsed Wasm into their own data
 /// structure while parsing and also validate at the same time without
 /// the need of an additional parsing or validation step or copying data around.

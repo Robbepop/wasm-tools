@@ -16,7 +16,7 @@ log = { workspace = true }
 tempfile = "3.0"
 wasm-mutate = { path = "../crates/wasm-mutate" }
 wasm-smith = { path = "../crates/wasm-smith" }
-wasmparser = { path = "../crates/wasmparser" }
+wasmparser = { path = "../crates/wasmparser", package = "wasmparser-nostd" }
 wasmprinter = { path = "../crates/wasmprinter" }
 wasmtime = { workspace = true, optional = true }
 wast = { path = "../crates/wast" }

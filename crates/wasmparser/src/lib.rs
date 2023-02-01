@@ -113,10 +113,10 @@ extern crate alloc;
 ///
 /// pub struct VisitAndDoNothing;
 ///
-/// impl<'a> wasmparser::VisitOperator<'a> for VisitAndDoNothing {
+/// impl<'a> wasmparser_nostd::VisitOperator<'a> for VisitAndDoNothing {
 ///     type Output = ();
 ///
-///     wasmparser::for_each_operator!(define_visit_operator);
+///     wasmparser_nostd::for_each_operator!(define_visit_operator);
 /// }
 /// ```
 #[macro_export]
