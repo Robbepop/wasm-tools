@@ -1,3 +1,11 @@
+> This is a fork of the [`wasmparser` crate] by the [Bytecode Alliance] with
+> the sole purpose to add `no_std` support with a focus on embedded environments.
+>
+> This crate will be deprecated as soon as the original `wasmparser` crate itself supports `no_std`.
+
+[`wasmparser` crate]: https://crates.io/crates/wasmparser
+[Bytecode Alliance]: https://bytecodealliance.org/
+
 <div align="center">
   <h1><code>wasm-tools</code></h1>
 
