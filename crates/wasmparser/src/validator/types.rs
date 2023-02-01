@@ -16,7 +16,7 @@ use ::core::{
 use ::alloc::{
     sync::Arc,
 };
-use url::Url;
+use ::alloc::string::String as Url;
 use ::alloc::boxed::Box;
 use ::alloc::vec::Vec;
 use ::alloc::string::String;
