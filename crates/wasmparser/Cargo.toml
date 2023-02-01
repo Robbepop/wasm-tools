@@ -14,7 +14,6 @@ exclude = ["benches/*.wasm"]
 
 [dependencies]
 indexmap = { version = "0.4.0", package = "indexmap-nostd", default-features = false }
-url = { workspace = true }
 
 [dev-dependencies]
 anyhow = { workspace = true }

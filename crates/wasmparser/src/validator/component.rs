@@ -22,7 +22,7 @@ use crate::{
 use indexmap::{map::Entry, IndexMap, IndexSet};
 use ::alloc::{collections::BTreeSet};
 use ::core::mem;
-use url::Url;
+use ::alloc::string::String as Url;
 use ::alloc::vec::Vec;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
@@ -41,14 +41,12 @@ fn to_kebab_str<'a>(s: &'a str, desc: &str, offset: usize) -> Result<&'a KebabSt
     }
 }
 
-fn parse_url(url: &str, offset: usize) -> Result<Option<Url>> {
+fn parse_url(url: &str, _offset: usize) -> Result<Option<Url>> {
     if url.is_empty() {
         return Ok(None);
     }
 
-    Url::parse(url)
-        .map(Some)
-        .map_err(|e| BinaryReaderError::new(e.to_string(), offset))
+    Ok(Some(Url::from(url)))
 }
 
 pub(crate) struct ComponentState {
