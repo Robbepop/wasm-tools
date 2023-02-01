@@ -15,9 +15,9 @@
 
 use crate::limits::{MAX_WASM_FUNCTION_PARAMS, MAX_WASM_FUNCTION_RETURNS};
 use crate::{BinaryReader, FromReader, Result, SectionLimited};
-use ::core::fmt::Debug;
 use ::alloc::boxed::Box;
 use ::alloc::vec::Vec;
+use ::core::fmt::Debug;
 
 /// Represents the types of values in a WebAssembly module.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
