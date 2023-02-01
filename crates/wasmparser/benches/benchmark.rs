@@ -4,7 +4,7 @@ use once_cell::unsync::Lazy;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
-use wasmparser::{DataKind, ElementKind, Parser, Payload, Validator, VisitOperator, WasmFeatures};
+use wasmparser_nostd::{DataKind, ElementKind, Parser, Payload, Validator, VisitOperator, WasmFeatures};
 
 /// A benchmark input.
 pub struct BenchmarkInput {
@@ -131,12 +131,12 @@ fn read_all_wasm(wasm: &[u8]) -> Result<()> {
                         }
                     }
                     match item.items {
-                        wasmparser::ElementItems::Functions(r) => {
+                        wasmparser_nostd::ElementItems::Functions(r) => {
                             for op in r {
                                 op?;
                             }
                         }
-                        wasmparser::ElementItems::Expressions(r) => {
+                        wasmparser_nostd::ElementItems::Expressions(r) => {
                             for op in r {
                                 op?;
                             }
@@ -158,7 +158,7 @@ fn read_all_wasm(wasm: &[u8]) -> Result<()> {
                 let mut reader = body.get_binary_reader();
                 for _ in 0..reader.read_var_u32()? {
                     reader.read_var_u32()?;
-                    reader.read::<wasmparser::ValType>()?;
+                    reader.read::<wasmparser_nostd::ValType>()?;
                 }
                 while !reader.eof() {
                     reader.visit_operator(&mut NopVisit)?;
@@ -222,7 +222,7 @@ fn read_all_wasm(wasm: &[u8]) -> Result<()> {
     Ok(())
 }
 
-/// Returns the default benchmark inputs that are proper `wasmparser` benchmark
+/// Returns the default benchmark inputs that are proper `wasmparser_nostd` benchmark
 /// test inputs.
 fn collect_benchmark_inputs() -> Vec<BenchmarkInput> {
     let mut ret = Vec::new();
@@ -342,5 +342,5 @@ macro_rules! define_visit_operator {
 impl<'a> VisitOperator<'a> for NopVisit {
     type Output = ();
 
-    wasmparser::for_each_operator!(define_visit_operator);
+    wasmparser_nostd::for_each_operator!(define_visit_operator);
 }

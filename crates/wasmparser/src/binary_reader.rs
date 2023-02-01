@@ -116,7 +116,7 @@ impl<'a> BinaryReader<'a> {
     /// # Examples
     /// ```
     /// let fn_body = &vec![0x41, 0x00, 0x10, 0x00, 0x0B];
-    /// let mut reader = wasmparser::BinaryReader::new(fn_body);
+    /// let mut reader = wasmparser_nostd::BinaryReader::new(fn_body);
     /// while !reader.eof() {
     ///     let op = reader.read_operator();
     ///     println!("{:?}", op)
@@ -724,7 +724,7 @@ impl<'a> BinaryReader<'a> {
     /// Store an offset for use in diagnostics or any other purposes:
     ///
     /// ```
-    /// # use wasmparser::{BinaryReader, VisitOperator, Result, for_each_operator};
+    /// # use wasmparser_nostd::{BinaryReader, VisitOperator, Result, for_each_operator};
     ///
     /// pub fn dump(mut reader: BinaryReader) -> Result<()> {
     ///     let mut visitor = Dumper { offset: 0 };
@@ -1542,9 +1542,9 @@ impl<'a> BrTable<'a> {
     ///
     /// ```rust
     /// let buf = [0x0e, 0x02, 0x01, 0x02, 0x00];
-    /// let mut reader = wasmparser::BinaryReader::new(&buf);
+    /// let mut reader = wasmparser_nostd::BinaryReader::new(&buf);
     /// let op = reader.read_operator().unwrap();
-    /// if let wasmparser::Operator::BrTable { targets } = op {
+    /// if let wasmparser_nostd::Operator::BrTable { targets } = op {
     ///     let targets = targets.targets().collect::<Result<Vec<_>, _>>().unwrap();
     ///     assert_eq!(targets, [1, 2]);
     /// }

@@ -2066,7 +2066,7 @@ impl<T> SnapshotList<T> {
     /// Panics if an index is passed in which falls within the
     /// previously-snapshotted list of types. This should never happen in our
     /// context and the panic is intended to weed out possible bugs in
-    /// wasmparser.
+    /// wasmparser_nostd.
     pub(crate) fn get_mut(&mut self, index: usize) -> Option<&mut T> {
         if index >= self.snapshots_total {
             return self.cur.get_mut(index - self.snapshots_total);

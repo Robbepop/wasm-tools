@@ -46,7 +46,7 @@ wasm-compose = { version = "0.2.5", path = "crates/wasm-compose"}
 wasm-mutate = { version = "0.2.16", path = "crates/wasm-mutate" }
 wasm-shrink = { version = "0.1.17", path = "crates/wasm-shrink" }
 wasm-smith = { version = "0.12.0", path = "crates/wasm-smith" }
-wasmparser = { version = "0.99.0", path = "crates/wasmparser" }
+wasmparser = { version = "0.99.0", path = "crates/wasmparser", package = "wasmparser-nostd" }
 wasmparser-dump = { version = "0.1.16", path = "crates/dump" }
 wasmprinter = { version = "0.2.49", path = "crates/wasmprinter" }
 wast = { version = "52.0.2", path = "crates/wast" }

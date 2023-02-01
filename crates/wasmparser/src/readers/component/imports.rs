@@ -98,7 +98,7 @@ impl<'a> FromReader<'a> for ComponentImport<'a> {
 /// # Examples
 ///
 /// ```
-/// use wasmparser::ComponentImportSectionReader;
+/// use wasmparser_nostd::ComponentImportSectionReader;
 /// let data: &[u8] = &[0x01, 0x01, 0x41, 0x00, 0x01, 0x66];
 /// let reader = ComponentImportSectionReader::new(data, 0).unwrap();
 /// for import in reader {

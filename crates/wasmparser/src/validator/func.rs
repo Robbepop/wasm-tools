@@ -139,7 +139,7 @@ impl<T: WasmModuleResources> FuncValidator<T> {
     /// # Example
     ///
     /// ```
-    /// # use wasmparser::{WasmModuleResources, FuncValidator, FunctionBody, Result};
+    /// # use wasmparser_nostd::{WasmModuleResources, FuncValidator, FunctionBody, Result};
     /// pub fn validate<R>(validator: &mut FuncValidator<R>, body: &FunctionBody<'_>) -> Result<()>
     /// where R: WasmModuleResources
     /// {

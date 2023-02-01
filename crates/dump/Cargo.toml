@@ -9,7 +9,7 @@ description = "Utility to dump debug information about the wasm binary format"
 
 [dependencies]
 anyhow = { workspace = true }
-wasmparser = { path = "../wasmparser", version = "0.99.0", default-features = false }
+wasmparser = { path = "../wasmparser", version = "0.99.0", default-features = false, package = "wasmparser-nostd" }
 
 [features]
 default = ["std"]
