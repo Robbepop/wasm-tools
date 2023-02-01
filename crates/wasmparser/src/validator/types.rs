@@ -39,7 +39,7 @@ const MAX_LOWERED_TYPES: usize = MAX_FLAT_FUNC_PARAMS + 1;
 ///
 /// It also provides an equality and hashing implementation
 /// that ignores ASCII case.
-#[derive(Debug, Eq)]
+#[derive(Debug, Eq, Ord)]
 #[repr(transparent)]
 pub struct KebabStr(str);
 
@@ -102,6 +102,21 @@ impl Deref for KebabStr {
     }
 }
 
+impl PartialOrd for KebabStr {
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+        if self.eq(other) {
+            return Some(core::cmp::Ordering::Equal)
+        }
+        self.0.partial_cmp(&other.0)
+    }
+}
+
+impl PartialOrd<KebabString> for KebabStr {
+    fn partial_cmp(&self, other: &KebabString) -> Option<core::cmp::Ordering> {
+        self.partial_cmp(other.as_kebab_str())
+    }
+}
+
 impl PartialEq for KebabStr {
     fn eq(&self, other: &Self) -> bool {
         if self.len() != other.len() {
@@ -152,7 +167,7 @@ impl ToOwned for KebabStr {
 ///
 /// It also provides an equality and hashing implementation
 /// that ignores ASCII case.
-#[derive(Debug, Clone, Eq)]
+#[derive(Debug, Clone, Eq, Ord)]
 pub struct KebabString(String);
 
 impl KebabString {
@@ -191,6 +206,18 @@ impl Deref for KebabString {
 impl Borrow<KebabStr> for KebabString {
     fn borrow(&self) -> &KebabStr {
         self.as_kebab_str()
+    }
+}
+
+impl PartialOrd for KebabString {
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+        self.as_kebab_str().partial_cmp(other.as_kebab_str())
+    }
+}
+
+impl PartialOrd<KebabStr> for KebabString {
+    fn partial_cmp(&self, other: &KebabStr) -> Option<core::cmp::Ordering> {
+        self.as_kebab_str().partial_cmp(other)
     }
 }
 
@@ -624,6 +651,18 @@ impl Hash for (dyn ModuleImportKey + '_) {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.module().hash(state);
         self.name().hash(state);
+    }
+}
+
+impl PartialOrd for (dyn ModuleImportKey + '_) {
+    fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for (dyn ModuleImportKey + '_) {
+    fn cmp(&self, other: &Self) -> core::cmp::Ordering {
+        self.module().cmp(other.module()).then(self.name().cmp(other.name()))
     }
 }
 
