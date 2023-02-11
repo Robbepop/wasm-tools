@@ -216,7 +216,7 @@ impl ModuleState {
                     .matches(ValType::Ref(e.ty), ValType::Ref(table.element_type), types)
                 {
                     return Err(BinaryReaderError::new(
-                        format!(
+                        ::alloc::format!(
                             "invalid element type `{}` for table type `{}`",
                             ty_to_str(e.ty.into()),
                             ty_to_str(table.element_type.into()),
