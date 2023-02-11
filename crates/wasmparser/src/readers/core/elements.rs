@@ -17,7 +17,7 @@ use crate::{
     BinaryReader, BinaryReaderError, ConstExpr, ExternalKind, FromReader, Result, SectionLimited,
     ValType,
 };
-use std::ops::Range;
+use ::core::ops::Range;
 
 /// Represents a core WebAssembly element segment.
 #[derive(Clone)]

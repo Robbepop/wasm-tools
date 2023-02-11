@@ -15,7 +15,9 @@
 
 use crate::limits::{MAX_WASM_FUNCTION_PARAMS, MAX_WASM_FUNCTION_RETURNS};
 use crate::{BinaryReader, FromReader, Result, SectionLimited};
-use std::fmt::Debug;
+use ::core::fmt::Debug;
+use ::alloc::boxed::Box;
+use ::alloc::vec::Vec;
 
 /// Represents the types of values in a WebAssembly module.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -88,7 +90,7 @@ pub struct FuncType {
 }
 
 impl Debug for FuncType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
         f.debug_struct("FuncType")
             .field("params", &self.params())
             .field("returns", &self.results())

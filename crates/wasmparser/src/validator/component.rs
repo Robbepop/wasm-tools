@@ -20,8 +20,13 @@ use crate::{
     TableType, TypeBounds, ValType, WasmFeatures,
 };
 use indexmap::{map::Entry, IndexMap, IndexSet};
-use std::{collections::HashSet, mem};
+use ::alloc::{collections::BTreeSet};
+use ::core::mem;
 use url::Url;
+use ::alloc::vec::Vec;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::borrow::ToOwned;
 
 fn to_kebab_str<'a>(s: &'a str, desc: &str, offset: usize) -> Result<&'a KebabStr> {
     match KebabStr::new(s) {
@@ -69,8 +74,8 @@ pub(crate) struct ComponentState {
 
     // Note: URL validation requires unique URLs by byte comparison, so
     // strings are used here and the URLs are not normalized.
-    import_urls: HashSet<String>,
-    export_urls: HashSet<String>,
+    import_urls: BTreeSet<String>,
+    export_urls: BTreeSet<String>,
 
     has_start: bool,
     type_size: u32,
@@ -900,9 +905,7 @@ impl ComponentState {
         offset: usize,
     ) -> Result<ComponentFuncType> {
         let mut type_size = 1;
-
-        let mut set =
-            HashSet::with_capacity(std::cmp::max(ty.params.len(), ty.results.type_count()));
+        let mut set = BTreeSet::new();
 
         let params = ty
             .params
