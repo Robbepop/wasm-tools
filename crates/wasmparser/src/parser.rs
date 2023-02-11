@@ -7,11 +7,11 @@ use crate::{
     GlobalSectionReader, ImportSectionReader, InstanceSectionReader, MemorySectionReader, Result,
     SectionLimited, TableSectionReader, TagSectionReader, TypeSectionReader,
 };
+use ::alloc::vec::Vec;
 use ::core::convert::TryInto;
 use ::core::fmt;
 use ::core::iter;
 use ::core::ops::Range;
-use ::alloc::vec::Vec;
 
 pub(crate) const WASM_MODULE_VERSION: u16 = 0x1;
 

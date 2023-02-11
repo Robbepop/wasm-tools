@@ -27,8 +27,8 @@ use crate::{
     Ieee64, MemArg, RefType, Result, ValType, VisitOperator, WasmFeatures, WasmFuncType,
     WasmModuleResources, V128,
 };
-use ::core::ops::{Deref, DerefMut};
 use ::alloc::vec::Vec;
+use ::core::ops::{Deref, DerefMut};
 
 pub(crate) struct OperatorValidator {
     pub(super) locals: Locals,

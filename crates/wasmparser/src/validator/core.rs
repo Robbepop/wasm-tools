@@ -12,12 +12,12 @@ use crate::{
     Global, GlobalType, HeapType, MemoryType, RefType, Result, Table, TableInit, TableType,
     TagType, TypeRef, ValType, VisitOperator, WasmFeatures, WasmFuncType, WasmModuleResources,
 };
-use indexmap::IndexMap;
-use ::core::mem;
-use ::alloc::{collections::BTreeSet, sync::Arc};
-use ::alloc::vec::Vec;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
+use ::alloc::vec::Vec;
+use ::alloc::{collections::BTreeSet, sync::Arc};
+use ::core::mem;
+use indexmap::IndexMap;
 
 // Section order for WebAssembly modules.
 //
@@ -1200,8 +1200,8 @@ const _: () = {
 };
 
 mod arc {
-    use ::core::ops::Deref;
     use ::alloc::sync::Arc;
+    use ::core::ops::Deref;
 
     enum Inner<T> {
         Owned(T),

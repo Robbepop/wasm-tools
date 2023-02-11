@@ -4,7 +4,10 @@ use once_cell::unsync::Lazy;
 use std::fs;
 use std::path::Path;
 use std::path::PathBuf;
-use wasmparser_nostd::{DataKind, ElementKind, HeapType, ValType, Parser, Payload, Validator, VisitOperator, WasmFeatures};
+use wasmparser_nostd::{
+    DataKind, ElementKind, HeapType, Parser, Payload, ValType, Validator, VisitOperator,
+    WasmFeatures,
+};
 
 /// A benchmark input.
 pub struct BenchmarkInput {
