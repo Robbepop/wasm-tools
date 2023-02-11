@@ -19,14 +19,14 @@ use crate::{
     ComponentTypeRef, ExternalKind, FuncType, GlobalType, InstantiationArgKind, MemoryType, Result,
     TableType, TypeBounds, ValType, WasmFeatures,
 };
-use indexmap::{map::Entry, IndexMap, IndexSet};
-use ::alloc::{collections::BTreeSet};
-use ::core::mem;
+use ::alloc::borrow::ToOwned;
+use ::alloc::collections::BTreeSet;
 use ::alloc::string::String as Url;
-use ::alloc::vec::Vec;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
-use ::alloc::borrow::ToOwned;
+use ::alloc::vec::Vec;
+use ::core::mem;
+use indexmap::{map::Entry, IndexMap, IndexSet};
 
 fn to_kebab_str<'a>(s: &'a str, desc: &str, offset: usize) -> Result<&'a KebabStr> {
     match KebabStr::new(s) {

@@ -5,7 +5,14 @@ use crate::{
     ComponentExport, ComponentImport, Export, ExternalKind, FuncType, GlobalType, Import,
     MemoryType, PrimitiveValType, TableType, TypeRef, ValType,
 };
-use indexmap::{IndexMap, IndexSet};
+use ::alloc::borrow::ToOwned;
+use ::alloc::boxed::Box;
+use ::alloc::collections::BTreeMap;
+use ::alloc::string::String as Url;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
+use ::alloc::sync::Arc;
+use ::alloc::vec::Vec;
 use ::core::{
     borrow::Borrow,
     fmt,
@@ -13,16 +20,7 @@ use ::core::{
     mem,
     ops::{Deref, DerefMut},
 };
-use ::alloc::{
-    sync::Arc,
-};
-use ::alloc::string::String as Url;
-use ::alloc::boxed::Box;
-use ::alloc::vec::Vec;
-use ::alloc::string::String;
-use ::alloc::string::ToString;
-use ::alloc::borrow::ToOwned;
-use ::alloc::collections::BTreeMap;
+use indexmap::{IndexMap, IndexSet};
 
 /// The maximum number of parameters in the canonical ABI that can be passed by value.
 ///
@@ -112,7 +110,7 @@ impl Deref for KebabStr {
 impl PartialOrd for KebabStr {
     fn partial_cmp(&self, other: &Self) -> Option<core::cmp::Ordering> {
         if self.eq(other) {
-            return Some(core::cmp::Ordering::Equal)
+            return Some(core::cmp::Ordering::Equal);
         }
         self.0.partial_cmp(&other.0)
     }
@@ -657,7 +655,9 @@ impl PartialOrd for (dyn ModuleImportKey + '_) {
 
 impl Ord for (dyn ModuleImportKey + '_) {
     fn cmp(&self, other: &Self) -> core::cmp::Ordering {
-        self.module().cmp(other.module()).then(self.name().cmp(other.name()))
+        self.module()
+            .cmp(other.module())
+            .then(self.name().cmp(other.name()))
     }
 }
 
