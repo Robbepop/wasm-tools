@@ -27,7 +27,8 @@ use crate::{
     Ieee64, MemArg, RefType, Result, ValType, VisitOperator, WasmFeatures, WasmFuncType,
     WasmModuleResources, V128,
 };
-use std::ops::{Deref, DerefMut};
+use ::core::ops::{Deref, DerefMut};
+use ::alloc::vec::Vec;
 
 pub(crate) struct OperatorValidator {
     pub(super) locals: Locals,
@@ -164,7 +165,7 @@ enum MaybeType {
 // unit of storage, so assert that it doesn't exceed 4 bytes which is the
 // current expected size.
 const _: () = {
-    assert!(std::mem::size_of::<MaybeType>() == 4);
+    assert!(::core::mem::size_of::<MaybeType>() == 4);
 };
 
 impl From<ValType> for MaybeType {

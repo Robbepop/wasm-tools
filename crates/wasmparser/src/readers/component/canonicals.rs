@@ -1,5 +1,6 @@
 use crate::limits::MAX_WASM_CANONICAL_OPTIONS;
 use crate::{BinaryReader, FromReader, Result, SectionLimited};
+use ::alloc::boxed::Box;
 
 /// Represents options for component functions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

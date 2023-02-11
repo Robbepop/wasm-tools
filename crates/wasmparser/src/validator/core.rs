@@ -13,8 +13,11 @@ use crate::{
     TagType, TypeRef, ValType, VisitOperator, WasmFeatures, WasmFuncType, WasmModuleResources,
 };
 use indexmap::IndexMap;
-use std::mem;
-use std::{collections::HashSet, sync::Arc};
+use ::core::mem;
+use ::alloc::{collections::BTreeSet, sync::Arc};
+use ::alloc::vec::Vec;
+use ::alloc::string::String;
+use ::alloc::string::ToString;
 
 // Section order for WebAssembly modules.
 //
@@ -483,7 +486,7 @@ pub(crate) struct Module {
     // Stores indexes into `types`.
     pub functions: Vec<u32>,
     pub tags: Vec<TypeId>,
-    pub function_references: HashSet<u32>,
+    pub function_references: BTreeSet<u32>,
     pub imports: IndexMap<(String, String), Vec<EntityType>>,
     pub exports: IndexMap<String, EntityType>,
     pub type_size: u32,
@@ -1197,8 +1200,8 @@ const _: () = {
 };
 
 mod arc {
-    use std::ops::Deref;
-    use std::sync::Arc;
+    use ::core::ops::Deref;
+    use ::alloc::sync::Arc;
 
     enum Inner<T> {
         Owned(T),
@@ -1240,7 +1243,7 @@ mod arc {
                 return;
             }
 
-            let inner = std::mem::replace(&mut self.inner, Inner::Empty);
+            let inner = ::core::mem::replace(&mut self.inner, Inner::Empty);
             let x = match inner {
                 Inner::Owned(x) => x,
                 _ => Self::unreachable(),
