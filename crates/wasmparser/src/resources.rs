@@ -14,7 +14,11 @@
  */
 
 use crate::{FuncType, GlobalType, MemoryType, TableType, ValType};
+#[cfg(not(feature = "portable-atomics"))]
+use ::alloc::sync::Arc;
 use ::core::ops::Range;
+#[cfg(feature = "portable-atomics")]
+use portable_atomic_util::Arc;
 
 /// Types that qualify as Wasm function types for validation purposes.
 pub trait WasmFuncType {
@@ -261,7 +265,7 @@ where
     }
 }
 
-impl<T> WasmModuleResources for ::alloc::sync::Arc<T>
+impl<T> WasmModuleResources for Arc<T>
 where
     T: WasmModuleResources,
 {

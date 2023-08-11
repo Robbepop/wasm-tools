@@ -12,10 +12,15 @@ use crate::{
     Global, GlobalType, MemoryType, Result, TableType, TagType, TypeRef, ValType, VisitOperator,
     WasmFeatures, WasmModuleResources,
 };
+use ::alloc::collections::BTreeSet;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
+#[cfg(not(feature = "portable-atomics"))]
+use ::alloc::sync::Arc;
 use ::alloc::vec::Vec;
-use ::alloc::{collections::BTreeSet, sync::Arc};
+#[cfg(feature = "portable-atomics")]
+use portable_atomic_util::Arc;
+
 use ::core::mem;
 use indexmap::IndexMap;
 
@@ -1065,8 +1070,12 @@ const _: () = {
 };
 
 mod arc {
+
+    #[cfg(not(feature = "portable-atomics"))]
     use ::alloc::sync::Arc;
     use ::core::ops::Deref;
+    #[cfg(feature = "portable-atomics")]
+    use portable_atomic_util::Arc;
 
     enum Inner<T> {
         Owned(T),
