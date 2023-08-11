@@ -17,10 +17,15 @@ use crate::{
     limits::*, BinaryReaderError, Encoding, FromReader, FunctionBody, Parser, Payload, Result,
     SectionLimited, ValType, WASM_COMPONENT_VERSION, WASM_MODULE_VERSION,
 };
+
+#[cfg(not(feature = "portable-atomics"))]
 use ::alloc::sync::Arc;
 use ::alloc::vec::Vec;
 use ::core::mem;
 use ::core::ops::Range;
+
+#[cfg(feature = "portable-atomics")]
+use portable_atomic_util::Arc;
 
 /// Test whether the given buffer contains a valid WebAssembly module or component,
 /// analogous to [`WebAssembly.validate`][js] in the JS API.

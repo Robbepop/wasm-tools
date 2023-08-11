@@ -11,6 +11,8 @@ use ::alloc::collections::BTreeMap;
 use ::alloc::string::String as Url;
 use ::alloc::string::String;
 use ::alloc::string::ToString;
+
+#[cfg(not(feature = "portable-atomics"))]
 use ::alloc::sync::Arc;
 use ::alloc::vec::Vec;
 use ::core::{
@@ -21,6 +23,8 @@ use ::core::{
     ops::{Deref, DerefMut},
 };
 use indexmap::{IndexMap, IndexSet};
+#[cfg(feature = "portable-atomics")]
+use portable_atomic_util::Arc;
 
 /// The maximum number of parameters in the canonical ABI that can be passed by value.
 ///
