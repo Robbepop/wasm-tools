@@ -10,10 +10,14 @@ use crate::{FunctionBody, Operator, WasmFeatures, WasmModuleResources};
 /// for sending to other threads while the original
 /// [`Validator`](crate::Validator) continues processing other functions.
 pub struct FuncToValidate<T> {
-    resources: T,
-    index: u32,
-    ty: u32,
-    features: WasmFeatures,
+    /// The reusable heap allocated resources required for Wasm validation.
+    pub resources: T,
+    /// The function index within the Wasm module.
+    pub index: u32,
+    /// The type index of the function.
+    pub ty: u32,
+    /// The Wasm features used for validating the function.
+    pub features: WasmFeatures,
 }
 
 impl<T: WasmModuleResources> FuncToValidate<T> {
