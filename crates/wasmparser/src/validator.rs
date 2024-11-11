@@ -246,13 +246,6 @@ impl WasmFeatures {
                 }
             }
             ValType::Ref(r) => self.check_ref_type(r),
-            ValType::V128 => {
-                if self.simd() {
-                    Ok(())
-                } else {
-                    Err("SIMD support is not enabled")
-                }
-            }
         }
     }
 

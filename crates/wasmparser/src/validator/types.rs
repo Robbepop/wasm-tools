@@ -1156,15 +1156,14 @@ impl TypeList {
             | (ValType::I32, _)
             | (ValType::I64, _)
             | (ValType::F32, _)
-            | (ValType::F64, _)
-            | (ValType::V128, _) => false,
+            | (ValType::F64, _) => false,
         }
     }
 
     /// Is `ty` shared?
     pub fn valtype_is_shared(&self, ty: ValType) -> bool {
         match ty {
-            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 | ValType::V128 => true,
+            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 => true,
             ValType::Ref(rt) => self.reftype_is_shared(rt),
         }
     }

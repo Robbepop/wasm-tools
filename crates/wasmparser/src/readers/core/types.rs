@@ -825,8 +825,6 @@ pub enum ValType {
     F32,
     /// The value type is f64.
     F64,
-    /// The value type is v128.
-    V128,
     /// The value type is a reference.
     Ref(RefType),
 }
@@ -845,7 +843,6 @@ impl fmt::Display for ValType {
             ValType::I64 => f.write_str("i64"),
             ValType::F32 => f.write_str("f32"),
             ValType::F64 => f.write_str("f64"),
-            ValType::V128 => f.write_str("v128"),
             ValType::Ref(r) => fmt::Display::fmt(r, f),
         }
     }
@@ -876,7 +873,7 @@ impl ValType {
     pub fn as_reference_type(&self) -> Option<RefType> {
         match *self {
             ValType::Ref(r) => Some(r),
-            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 | ValType::V128 => None,
+            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 => None,
         }
     }
 
@@ -884,7 +881,7 @@ impl ValType {
     /// type.
     pub fn is_defaultable(&self) -> bool {
         match *self {
-            Self::I32 | Self::I64 | Self::F32 | Self::F64 | Self::V128 => true,
+            Self::I32 | Self::I64 | Self::F32 | Self::F64 => true,
             Self::Ref(rt) => rt.is_nullable(),
         }
     }
@@ -902,7 +899,7 @@ impl ValType {
                     *r = RefType::concrete(r.is_nullable(), idx);
                 }
             }
-            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 | ValType::V128 => {}
+            ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 => {}
         }
         Ok(())
     }
@@ -1705,10 +1702,6 @@ impl<'a> FromReader<'a> for ValType {
             0x7C => {
                 reader.read_u8()?;
                 Ok(ValType::F64)
-            }
-            0x7B => {
-                reader.read_u8()?;
-                Ok(ValType::V128)
             }
             _ => {
                 // Reclassify errors as invalid value types here because

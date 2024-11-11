@@ -285,7 +285,7 @@ impl Matches for WithRecGroup<ValType> {
             ),
             (ValType::Ref(_), _) => false,
 
-            (ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64 | ValType::V128, _) => {
+            (ValType::I32 | ValType::I64 | ValType::F32 | ValType::F64, _) => {
                 *a == *b
             }
         }

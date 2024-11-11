@@ -167,34 +167,6 @@ impl From<Ieee64> for f64 {
     }
 }
 
-/// Represents a 128-bit vector value.
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
-pub struct V128(pub(crate) [u8; 16]);
-
-impl V128 {
-    /// Gets the bytes of the vector value.
-    pub fn bytes(&self) -> &[u8; 16] {
-        &self.0
-    }
-
-    /// Gets a signed 128-bit integer value from the vector's bytes.
-    pub fn i128(&self) -> i128 {
-        i128::from_le_bytes(self.0)
-    }
-}
-
-impl From<V128> for i128 {
-    fn from(bits: V128) -> i128 {
-        bits.i128()
-    }
-}
-
-impl From<V128> for u128 {
-    fn from(bits: V128) -> u128 {
-        u128::from_le_bytes(bits.0)
-    }
-}
-
 /// Represents the memory ordering for atomic instructions.
 ///
 /// For an in-depth explanation of memory orderings, see the C++ documentation
