@@ -244,3 +244,15 @@ wit-smith = ['dep:wit-smith', 'arbitrary']
 addr2line = ['dep:addr2line', 'dep:gimli', 'dep:wasmparser']
 completion = ['dep:clap_complete']
 json-from-wast = ['dep:serde_derive', 'dep:serde_json', 'dep:wast', 'dep:serde']
+
+[profile.production]
+inherits = "release"
+lto = "fat"
+codegen-units = 1
+
+[profile.production-z]
+inherits = "release"
+opt-level = "s"
+lto = "fat"
+codegen-units = 1
+strip = "symbols"
