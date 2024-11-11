@@ -252,7 +252,5 @@ codegen-units = 1
 
 [profile.production-z]
 inherits = "release"
-opt-level = "s"
-lto = "fat"
+opt-level = "z"
 codegen-units = 1
-strip = "symbols"
