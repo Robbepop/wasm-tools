@@ -734,30 +734,33 @@ macro_rules! _for_each_operator {
 }
 
 macro_rules! define_for_each_non_simd_operator {
-    (@ $($t:tt)*) => {define_for_each_non_simd_operator!(filter [] @ $($t)*);};
+    (@$next:ident $($t:tt)*) => {define_for_each_non_simd_operator!(filter @$next [] $($t)*);};
 
     (
-        filter [$($t:tt)*]
-        @simd $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*) $($rest:tt)*
+        filter @simd [$($t:tt)*]
+        $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*)
+        $( @$next:ident $($rest:tt)* )?
     ) => {
-        define_for_each_non_simd_operator!(filter [$($t)*] $($rest)*);
+        define_for_each_non_simd_operator!(filter $(@$next)? [$($t)*] $($($rest)*)?);
     };
     (
-        filter [$($t:tt)*]
-        @relaxed_simd $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*) $($rest:tt)*
+        filter @relaxed_simd [$($t:tt)*]
+        $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*)
+        $( @$next:ident $($rest:tt)* )?
     ) => {
-        define_for_each_non_simd_operator!(filter [$($t)*] $($rest)*);
+        define_for_each_non_simd_operator!(filter $(@$next)? [$($t)*] $($($rest)*)?);
     };
     (
-        filter [$($t:tt)*]
-        @$proposal:ident $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*) $($rest:tt)*
+        filter @$proposal:ident [$($t:tt)*]
+        $op:ident $({ $($arg:ident: $argty:ty),* })? => $visit:ident ($($ann:tt)*)
+        $(@$next:ident $($rest:tt)* )?
     ) => {
         define_for_each_non_simd_operator!(
-            filter [
+            filter $(@$next)? [
                 $($t)*
                 @$proposal $op $({ $($arg: $argty),* })? => $visit ($($ann)*)
             ]
-            $($rest)*
+            $($($rest)*)?
         );
     };
 
