@@ -153,11 +153,11 @@ define_wasm_features! {
         /// The WebAssembly bulk memory operations proposal.
         pub bulk_memory: BULK_MEMORY(1 << 5) = true;
         /// The WebAssembly SIMD proposal.
-        pub simd: SIMD(1 << 6) = true;
+        pub simd: SIMD(1 << 6) = false;
         /// The WebAssembly Relaxed SIMD proposal.
-        pub relaxed_simd: RELAXED_SIMD(1 << 7) = true;
+        pub relaxed_simd: RELAXED_SIMD(1 << 7) = false;
         /// The WebAssembly threads proposal.
-        pub threads: THREADS(1 << 8) = true;
+        pub threads: THREADS(1 << 8) = false;
         /// The WebAssembly shared-everything-threads proposal; includes new
         /// component model built-ins.
         pub shared_everything_threads: SHARED_EVERYTHING_THREADS(1 << 9) = false;
@@ -177,19 +177,19 @@ define_wasm_features! {
         /// The WebAssembly multi memory proposal.
         pub multi_memory: MULTI_MEMORY(1 << 12) = true;
         /// The WebAssembly exception handling proposal.
-        pub exceptions: EXCEPTIONS(1 << 13) = true;
+        pub exceptions: EXCEPTIONS(1 << 13) = false;
         /// The WebAssembly memory64 proposal.
-        pub memory64: MEMORY64(1 << 14) = true;
+        pub memory64: MEMORY64(1 << 14) = false;
         /// The WebAssembly extended_const proposal.
         pub extended_const: EXTENDED_CONST(1 << 15) = true;
         /// The WebAssembly component model proposal.
-        pub component_model: COMPONENT_MODEL(1 << 16) = true;
+        pub component_model: COMPONENT_MODEL(1 << 16) = false;
         /// The WebAssembly typed function references proposal.
-        pub function_references: FUNCTION_REFERENCES(1 << 17) = true;
+        pub function_references: FUNCTION_REFERENCES(1 << 17) = false;
         /// The WebAssembly memory control proposal.
         pub memory_control: MEMORY_CONTROL(1 << 18) = false;
         /// The WebAssembly gc proposal.
-        pub gc: GC(1 << 19) = true;
+        pub gc: GC(1 << 19) = false;
         /// The WebAssembly [custom-page-sizes
         /// proposal](https://github.com/WebAssembly/custom-page-sizes).
         pub custom_page_sizes: CUSTOM_PAGE_SIZES(1 << 20) = false;
