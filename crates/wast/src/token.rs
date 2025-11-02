@@ -461,19 +461,33 @@ macro_rules! float {
                 Float::Nan { negative, val } => {
                     let exp_bits = (1 << $exp_bits) - 1;
                     let neg_bit = *negative as $int;
-                    let signif = match val {
-                        Some(val) => $int::from_str_radix(val,16).ok()?,
-                        None => 1 << (signif_bits - 1),
+
+                    // parsed payload (if any), otherwise the default payload is the quiet bit
+                    let payload = match val {
+                        Some(s) => $int::from_str_radix(s, 16).ok()?,
+                        None => 0,
                     };
-                    // If the significand is zero then this is actually infinity
-                    // so we fail to parse it.
-                    if signif & signif_mask == 0 {
+
+                    // mask payload to the allowed significand bits
+                    let payload_mask = (1usize << signif_bits) - 1;
+                    let payload = (payload as usize) & payload_mask;
+
+                    // always set the quiet bit (highest significand bit)
+                    let quiet_bit = 1usize << (signif_bits - 1);
+                    let signif = (payload | quiet_bit) as $int;
+
+                    // If the significand (after masking/setting quiet bit) would be zero,
+                    // it's actually infinity -> fail to parse.  (This case will no longer
+                    // happen because we set quiet_bit, but keep semantics consistent if you
+                    // prefer to treat explicit 0 payload as error remove setting quiet_bit.)
+                    if signif & (signif_mask as $int) == 0 {
                         return None;
                     }
+
                     return Some(
                         (neg_bit << neg_offset) |
                         (exp_bits << exp_offset) |
-                        (signif & signif_mask)
+                        (signif & (signif_mask as $int))
                     );
                 }
 
